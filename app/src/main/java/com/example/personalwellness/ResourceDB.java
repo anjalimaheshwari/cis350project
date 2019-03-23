@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ResourceDB {
-
+    private List<User> userDB = new ArrayList<User>();
     private List<Resource> resourceList = new ArrayList<Resource>();
 
     public ResourceDB() {
-        //mental health
         resourceList.add(new Resource("Grief Referrals: " +
                 "Penn Students of AMF (Actively Moving Forward)","grief",
                 "1) a peer-led Grief Support Group for Penn students who are coping with the illness or death of a loved one to connect with others “who get it,”\n" +
@@ -90,10 +89,17 @@ public class ResourceDB {
                 "·         Thursdays 8-11pm Chaplain's Office\n",
                 "st", "Various Philadelphia locations",
                 "pennbenjamins.org", 1, 1, "(901) 338-0828"));
+
+        userDB.add(new User("John Doe", "username", "password"));
     }
 
-    public List getResourceList() {
+    public List<Resource> getResourceList() {
         return resourceList;
     }
 
+    public List<User> getUserDB() { return userDB; }
+
+    public void addUser(User u) {
+        userDB.add(u);
+    }
 }
