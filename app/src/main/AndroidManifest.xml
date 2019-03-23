@@ -12,6 +12,7 @@
         <activity android:name=".SleepPage"></activity>
         <activity android:name=".GriefReferralPage" />
         <activity android:name=".CommunityPage" />
+        <activity android:name=".SpotifyPlayer" />
         <activity android:name=".DietPage" />
         <activity android:name=".StressPage" />
         <activity android:name=".FitnessPage" />
