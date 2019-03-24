@@ -65,7 +65,7 @@ public class SleepPage extends AppCompatActivity {
                         public void onClick(View v) {
                             Intent intent = new Intent(SleepPage.this,
                                     SpotifyPlayer.class);
-                            intent.putExtra("buttonid", b + "");
+                            intent.putExtra("type", "soothing");
                             startActivity(intent);
                         }
                     });

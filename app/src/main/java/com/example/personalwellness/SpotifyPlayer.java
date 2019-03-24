@@ -30,6 +30,7 @@ public class SpotifyPlayer extends AppCompatActivity{
     private static final String SOOTHING_URI = "61Tcx2dNtKu5IMdSb9q6Y1";
     private static final String WORKOUT_URI = "37i9dQZF1DXdURFimg6Blm";
     private static final String STUDY_URI = "37i9dQZF1DX8Uebhn9wzrS";
+    private String type;
 
     private TextView trackName;
 
@@ -43,6 +44,7 @@ public class SpotifyPlayer extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
+        this.type = getIntent().getStringExtra("type");
         ConnectionParams connectionParams =
                 new ConnectionParams.Builder(CLIENT_ID)
                         .setRedirectUri(REDIRECT_URI)
@@ -101,7 +103,13 @@ public class SpotifyPlayer extends AppCompatActivity{
 
     private void connected() {
 
-        mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SOOTHING_URI);
+        if (this.type.equals("soothing")) {
+            mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SOOTHING_URI);
+        } else if (this.type.equals("fitness")) {
+            mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + WORKOUT_URI);
+        } else {
+            mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + STUDY_URI);
+        }
 
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()
