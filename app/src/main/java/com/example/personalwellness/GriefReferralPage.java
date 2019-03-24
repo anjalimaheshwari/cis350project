@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.location.Location;
+import android.Manifest;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -51,7 +53,6 @@ public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCa
 
             }
         }
-
     }
 
     /**
