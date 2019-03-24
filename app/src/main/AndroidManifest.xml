@@ -43,7 +43,12 @@
         <activity android:name=".StressPage" />
         <activity android:name=".FitnessPage" />
         <activity android:name=".CAPSPage" />
+        <activity android:name=".RecsPage"/>
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".CreateAccountActivity"/>
+        <activity android:name=".SurveyActivity"/>
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

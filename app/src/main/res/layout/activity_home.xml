@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <Button
+        android:id="@+id/mentalhealth"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:text="Mental Health"
+        app:layout_constraintBottom_toTopOf="@+id/diet"
+        app:layout_constraintEnd_toStartOf="@+id/stress"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/diet"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:text="Diet"
+        app:layout_constraintBottom_toTopOf="@+id/sleep"
+        app:layout_constraintEnd_toStartOf="@+id/fitness"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentalhealth" />
+
+    <Button
+        android:id="@+id/stress"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:text="Stress"
+        app:layout_constraintBottom_toTopOf="@+id/fitness"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mentalhealth"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/fitness"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:text="Fitness"
+        app:layout_constraintBottom_toTopOf="@+id/community"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/diet"
+        app:layout_constraintTop_toBottomOf="@+id/stress" />
+
+    <Button
+        android:id="@+id/sleep"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:text="Sleep"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/community"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diet" />
+
+    <Button
+        android:id="@+id/community"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:text="Seeking Community"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/sleep"
+        app:layout_constraintTop_toBottomOf="@+id/fitness" />
+
+    <Button
+        android:id="@+id/recommendations"
+        android:layout_width="301dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:text="Recommendations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

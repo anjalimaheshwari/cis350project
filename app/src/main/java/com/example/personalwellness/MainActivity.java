@@ -7,77 +7,58 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ResourceDB database;
+    private EditText usernameET, passwordET;
+    private Button loginButton, createAccountButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button capsButton = (Button) findViewById(R.id.mentalhealth);
-        capsButton.setOnClickListener(new View.OnClickListener() {
+        database = new ResourceDB();
+        usernameET = (EditText) findViewById(R.id.usernameEditText);
+        passwordET = (EditText) findViewById(R.id.passwordEditText);
+        loginButton = (Button) findViewById(R.id.loginButton);
+        createAccountButton = (Button) findViewById(R.id.createAccountButton);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent int1 = new Intent(MainActivity.this,CAPSPage.class);
-                startActivity(int1);
+                String usernameString = usernameET.getText().toString();
+                String passwordString = passwordET.getText().toString();
+                User u = checkValidUser(usernameString, passwordString);
+                if (u != null) {
+                    Intent i = new Intent(MainActivity.this,
+                            SurveyActivity.class);
+                    i.putExtra("accountNum", u.getAccountNum());
+                    startActivity(i);
+                }
             }
         });
 
-        Button dietButton = (Button) findViewById(R.id.diet);
-        dietButton.setOnClickListener(new View.OnClickListener() {
+        createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent int2 = new Intent(MainActivity.this,DietPage.class);
-                startActivity(int2);
+                Intent i2 = new Intent(MainActivity.this,
+                        CreateAccountActivity.class);
+                i2.putExtra("database", database);
+                startActivity(i2);
             }
         });
 
+    }
 
-        Button stressButton = (Button) findViewById(R.id.stress);
-        stressButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent int3 = new Intent(MainActivity.this,StressPage.class);
-                startActivity(int3);
+    private User checkValidUser(String username, String password) {
+        for (User u : database.getUserDB()) {
+            if (u.getUserName().equals(username) && u.isPassword(password)) {
+                return u;
             }
-        });
-
-
-        Button fitnessButton = (Button) findViewById(R.id.fitness);
-        fitnessButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent int4 = new Intent(MainActivity.this,FitnessPage.class);
-                startActivity(int4);
-            }
-        });
-
-        Button sleepButton = (Button) findViewById(R.id.sleep);
-        sleepButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent int5 = new Intent(MainActivity.this,SleepPage.class);
-                startActivity(int5);
-            }
-        });
-
-        Button communityButton = (Button) findViewById(R.id.community);
-        communityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent int6 = new Intent(MainActivity.this,CommunityPage.class);
-                startActivity(int6);
-            }
-        });
-
-        Button recsButtom = (Button) findViewById(R.id.recommendations);
-        communityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent int7 = new Intent(MainActivity.this,RecsPage.class);
-                startActivity(int7);
-            }
-        });
+        }
+        return null;
     }
 }
