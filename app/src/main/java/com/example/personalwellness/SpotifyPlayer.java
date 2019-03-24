@@ -113,13 +113,13 @@ public class SpotifyPlayer extends AppCompatActivity{
 
         if (this.type.equals("stress")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SOOTHING_URI);
-            imageView.setImageResource(R.drawable.chill);
+            //imageView.setImageResource(R.drawable.chill);
         } else if (this.type.equals("fitness")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + FITNESS_URI);
-            imageView.setImageResource(R.drawable.beastmode);
+            //imageView.setImageResource(R.drawable.beastmode);
         } else {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SLEEP_URI);
-            imageView.setImageResource(R.drawable.meditation);
+            //imageView.setImageResource(R.drawable.meditation);
         }
 
         // Subscribe to PlayerState
