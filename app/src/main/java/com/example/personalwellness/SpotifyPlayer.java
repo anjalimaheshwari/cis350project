@@ -28,8 +28,8 @@ public class SpotifyPlayer extends AppCompatActivity{
     private static final String REDIRECT_URI = "penn-wellness-resources-login://callback";
 
     private static final String SOOTHING_URI = "61Tcx2dNtKu5IMdSb9q6Y1";
-    private static final String WORKOUT_URI = "37i9dQZF1DXdURFimg6Blm";
-    private static final String STUDY_URI = "37i9dQZF1DX8Uebhn9wzrS";
+    private static final String FITNESS_URI = "37i9dQZF1DXdURFimg6Blm";
+    private static final String SLEEP_URI = "37i9dQZF1DWZd79rJ6a7lp";
     private String type;
 
     private TextView trackName;
@@ -103,12 +103,12 @@ public class SpotifyPlayer extends AppCompatActivity{
 
     private void connected() {
 
-        if (this.type.equals("soothing")) {
+        if (this.type.equals("stress")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SOOTHING_URI);
         } else if (this.type.equals("fitness")) {
-            mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + WORKOUT_URI);
+            mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + FITNESS_URI);
         } else {
-            mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + STUDY_URI);
+            mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SLEEP_URI);
         }
 
         // Subscribe to PlayerState

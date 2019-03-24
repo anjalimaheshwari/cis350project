@@ -70,6 +70,11 @@ public class ResourceDB {
                 "3611 Locust Walk", "https://www.vpul.upenn.edu/alcohol/",
                 39.954100, -75.211920, "(215) 573-3525", false));
 
+        resourceList.add(new Resource("Listen to Workout Music",
+                "h", "", "sl",
+                "",
+                "", 1, 1, "", true));
+
         //sleep
         resourceList.add(new Resource("The Penn Program for Mindfulness, Stress Management, and More",
                 "h", "The Penn Program for Mindfulness teaches you how to manage the stresses of life with powerful " +
@@ -78,7 +83,7 @@ public class ResourceDB {
                 "Various Philadelphia locations",
                 "http://www.pennmedicine.org/stress/ ", 39.952049, -75.173492, "800-789-PENN(7366)", false));
 
-        resourceList.add(new Resource("Listen to Calming Music",
+        resourceList.add(new Resource("Listen to Music as You Fall Asleep",
                 "h", "", "sl",
                 "",
                 "", 1, 1, "", true));
@@ -93,6 +98,11 @@ public class ResourceDB {
                 "·         Thursdays 8-11pm Chaplain's Office\n",
                 "st", "Various Philadelphia locations",
                 "pennbenjamins.org", 39.954100, -75.211920, "(901) 338-0828", false));
+
+        resourceList.add(new Resource("Listen to Calming Music",
+                "h", "", "st",
+                "",
+                "", 1, 1, "", true));
 
         userDB.add(new User("John Doe", "username", "password"));
     }
