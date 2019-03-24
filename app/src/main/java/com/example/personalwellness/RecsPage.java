@@ -17,7 +17,6 @@ public class RecsPage extends AppCompatActivity {
     Proc proc = new Proc(resourceDB);
     List<Resource> recommentations = proc.getRecs(resourceDB.getUserDB().get(0));
     Button[] button = new Button[recommentations.size()];
-    int index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,7 @@ public class RecsPage extends AppCompatActivity {
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(ll);
 
-        for (int i = 0; i < index-1; i++) {
+        for (int i = 0; i < recommentations.size()-1; i++) {
             if (button[i] != null) {
                 constraintSet.connect(button[i].getId(), ConstraintSet.TOP, button[i+1].getId(),
                         ConstraintSet.BOTTOM);

@@ -103,8 +103,15 @@ public class ResourceDB {
                 "h", "", "st",
                 "",
                 "", 1, 1, "", true));
+        User john = new User("John Doe", "username", "password");
+        john.updateCommunity(0);
+        john.updateDiet(0);
+        john.updateFitness(8);
+        john.updateMentalHealth(9);
+        john.updateStress(4);
+        john.updateSleep(0);
+        userDB.add(john);
 
-        userDB.add(new User("John Doe", "username", "password"));
     }
 
     public List<Resource> getCategoryResource(String category) {
