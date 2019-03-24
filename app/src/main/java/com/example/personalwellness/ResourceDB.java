@@ -71,7 +71,7 @@ public class ResourceDB {
                 39.954100, -75.211920, "(215) 573-3525", false));
 
         resourceList.add(new Resource("Listen to Workout Music",
-                "h", "", "sl",
+                "h", "", "f",
                 "",
                 "", 1, 1, "", true));
 
