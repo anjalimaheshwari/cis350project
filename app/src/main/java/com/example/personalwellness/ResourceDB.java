@@ -97,6 +97,16 @@ public class ResourceDB {
         userDB.add(new User("John Doe", "username", "password"));
     }
 
+    public List<Resource> getCategoryResource(String category) {
+        List<Resource> categoryResources = null;
+        for (Resource curr : resourceList) {
+            if (curr.getCategory().equals(category)) {
+                categoryResources.add(curr);
+            }
+        }
+        return categoryResources;
+    }
+
     public List<Resource> getResourceList() {
         return resourceList;
     }
