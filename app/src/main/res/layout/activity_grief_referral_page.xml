@@ -41,6 +41,15 @@
             android:layout_marginBottom="20dp"
             app:showAsAction="never"/>
 
+        <TextView
+            android:id="@+id/distance_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distance:"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/map" />
 
         <TextView
             android:id="@+id/summary"
@@ -50,7 +59,7 @@
             android:textSize="24sp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/map" />
+            app:layout_constraintTop_toBottomOf="@+id/distance_text" />
 
         <TextView
             android:id="@+id/resourceabout"
