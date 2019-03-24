@@ -1,10 +1,13 @@
 package com.example.personalwellness;
 
+import java.util.List;
+
 public class User {
 
     private String name, username, password;
     private int accountNum = 0 , mentalHealth = 0, stress = 0, diet = 0,
             fitness = 0, community = 0, sleep = 0;
+    private List<Resource> personalRecs = null;
 
     private static int uniqueNum = 0;
 
@@ -80,7 +83,7 @@ public class User {
         community += update;
     }
 
-
+    public void updatePersonalRecs(List<Resource> personalRecs) { this.personalRecs = personalRecs; }
 
 
 
