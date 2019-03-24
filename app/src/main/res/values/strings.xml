@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PersonalWellness</string>
+    <string name="title_activity_maps_temp">Map</string>
 </resources>
