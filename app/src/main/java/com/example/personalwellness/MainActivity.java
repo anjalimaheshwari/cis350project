@@ -70,5 +70,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(int6);
             }
         });
+
+        Button recsButtom = (Button) findViewById(R.id.recommendations);
+        communityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent int7 = new Intent(MainActivity.this,RecsPage.class);
+                startActivity(int7);
+            }
+        });
     }
 }
