@@ -1,5 +1,9 @@
 package com.example.personalwellness;
 
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,13 +13,18 @@ import android.widget.Toast;
 import android.location.Location;
 import android.Manifest;
 
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCallback {
@@ -24,6 +33,15 @@ public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCa
     double lat;
     double lng;
     String resourceName;
+
+    public static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    public static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    public static final float ZOOM = 15f;
+    public static final int REQUEST_CODE = 2323;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private boolean permissionGranted = false;
+    private LatLng userCoordinates;
+    private double distance = -1;
 
     private GoogleMap mMap;
 
@@ -39,6 +57,7 @@ public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCa
         TextView textAbout = (TextView) findViewById(R.id.resourceabout);
         TextView textAddress = (TextView) findViewById(R.id.address);
         initMap();
+        checkLocationPermission();
 
         for (int i = 0; i < resources.size(); i++) {
             if (extra.equals((i+1)+"")) {
@@ -70,6 +89,46 @@ public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCa
         Toast.makeText(this, "map is ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "-----------creating map");
         moveCam(new LatLng(lat, lng), resourceName);
+        if (permissionGranted) {
+            getUserLocation();
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            mMap.setMyLocationEnabled(true);
+
+        }
+    }
+
+    private void calculateDistance() {
+        if (userCoordinates != null) {
+            double userLng = userCoordinates.longitude;
+            double userLat = userCoordinates.latitude;
+            double theta = userLng - lng;
+            distance = Math.sin(deg2rad(userLat)) * Math.sin(deg2rad(lat)) + Math.cos(deg2rad(userLat)) *
+                    Math.cos(deg2rad(lat)) * Math.cos(deg2rad(theta));
+            distance = Math.acos(distance);
+            distance = rad2deg(distance);
+            distance = distance * 60 * 1.1515;
+            Log.d(TAG, "-----------DISTANCE " + distance);
+            TextView textDistance = (TextView) findViewById(R.id.distance_text);
+            DecimalFormat df = new DecimalFormat("#.##");
+            String d = df.format(distance);
+            textDistance.setText("Distance from current location: " + d + " miles");
+        } else {
+            TextView textDistance = (TextView) findViewById(R.id.distance_text);
+            textDistance.setText("Enable location services to see distance from your current location");
+        }
+    }
+
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 
 
@@ -88,6 +147,74 @@ public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCa
         if (!title.equals("My location")) {
             MarkerOptions options = new MarkerOptions().position(coords).title(title);
             mMap.addMarker(options);
+        }
+    }
+
+    private void getUserLocation() {
+
+        Log.d(TAG, "-----------getting user location");
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        try {
+            if (permissionGranted) {
+                Task loc = mFusedLocationProviderClient.getLastLocation();
+                loc.addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "onComplete: found users location");
+                            Location currLocation = (Location) task.getResult();
+                            userCoordinates = new LatLng(currLocation.getLatitude(), currLocation.getLongitude());
+                            calculateDistance();
+
+                        } else {
+                            Log.d(TAG, "onComplete: did not find users location");
+                            Toast.makeText(GriefReferralPage.this, "couldn't get current location", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        } catch (SecurityException s) {
+            Log.d(TAG, "-----------security exception: " + s.getMessage());
+        }
+    }
+
+    // checks location permission
+    public void checkLocationPermission() {
+        String[] permissions = {FINE_LOCATION, COARSE_LOCATION};
+        Log.d(TAG, "-----------checking permission");
+
+        if (ContextCompat.checkSelfPermission(this, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                permissionGranted = true;
+                initMap();
+            } else {
+                ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE);
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE);
+        }
+    }
+
+    // checks if the user gave permission to access their location
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        permissionGranted = false;
+        switch(requestCode) {
+            case REQUEST_CODE: {
+                if(grantResults.length > 0) {
+                    for (int i = 0; i < grantResults.length; i++) {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                            permissionGranted = false;
+                            Log.d(TAG, "-----------permission denied");
+                            return;
+                        }
+                    }
+                    Log.d(TAG, "-----------permission granted");
+                    permissionGranted = true;
+                    initMap();
+                }
+            }
         }
     }
 }
