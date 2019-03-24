@@ -1,5 +1,7 @@
 package com.example.personalwellness;
 
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spotify.android.appremote.api.ConnectionParams;
@@ -21,6 +24,10 @@ import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
+
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 
 public class SpotifyPlayer extends AppCompatActivity{
 
@@ -33,6 +40,7 @@ public class SpotifyPlayer extends AppCompatActivity{
     private String type;
 
     private TextView trackName;
+    private ImageView imageView;
 
     private SpotifyAppRemote mSpotifyAppRemote;
 
@@ -105,10 +113,13 @@ public class SpotifyPlayer extends AppCompatActivity{
 
         if (this.type.equals("stress")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SOOTHING_URI);
+            imageView.setImageResource(R.drawable.chill);
         } else if (this.type.equals("fitness")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + FITNESS_URI);
+            imageView.setImageResource(R.drawable.beastmode);
         } else {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SLEEP_URI);
+            imageView.setImageResource(R.drawable.meditation);
         }
 
         // Subscribe to PlayerState
@@ -119,7 +130,6 @@ public class SpotifyPlayer extends AppCompatActivity{
                     if (track != null) {
                         Log.d("MainActivity", track.name + " by " + track.artist.name);
                         trackName.setText(track.name + " - " + track.artist.name);
-                        //track.imageUri;
                     }
                 });
     }
