@@ -45,5 +45,9 @@ public class Resource {
 
     public String getAddress() { return address; }
 
+    public double getLat() { return lat; }
+
+    public double getLng() { return lon; }
+
     public boolean getIsSpotify() { return isSpotify; }
 }

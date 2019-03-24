@@ -47,7 +47,7 @@ public class ResourceDB {
                 "mindfulness-based tools. Our programs will teach you how to actively manage the range of challenges that you face in " +
                 "life while you learn to enhance well-being, improve relationships, and increase productivity.", "d",
                 "Various Philadelphia locations",
-                "http://www.pennmedicine.org/stress/ ", 40.055980, -75.238430, "800-789-PENN(7366)", false));
+                "http://www.pennmedicine.org/stress/ ", 39.952049, -75.173492, "800-789-PENN(7366)", false));
 
         //seeking community
         resourceList.add(new Resource("Lesbian Gay Bisexual Transgender Center (LGBTC)",
@@ -76,7 +76,7 @@ public class ResourceDB {
                 "mindfulness-based tools. Our programs will teach you how to actively manage the range of challenges that you face in " +
                 "life while you learn to enhance well-being, improve relationships, and increase productivity.", "sl",
                 "Various Philadelphia locations",
-                "http://www.pennmedicine.org/stress/ ", 40.055980, -75.238430, "800-789-PENN(7366)", false));
+                "http://www.pennmedicine.org/stress/ ", 39.952049, -75.173492, "800-789-PENN(7366)", false));
 
         resourceList.add(new Resource("Listen to Calming Music",
                 "h", "", "sl",
