@@ -10,9 +10,11 @@ public class Resource {
     private double lat;
     private double lon;
     private String phonenumber;
+    private boolean isSpotify;
 
     public Resource(String name, String image, String summary, String category,
-                    String address, String website, double lat, double lon, String phonenumber) {
+                    String address, String website, double lat, double lon, String phonenumber,
+                    boolean isSpotify) {
         this.name = name;
         this.image = image;
         this.summary = summary;
@@ -22,6 +24,7 @@ public class Resource {
         this.lat = lat;
         this.lon = lon;
         this.phonenumber = phonenumber;
+        this.isSpotify = isSpotify;
     }
 
     public String getCategory() {
@@ -42,4 +45,9 @@ public class Resource {
 
     public String getAddress() { return address; }
 
+    public double getLat() { return lat; }
+
+    public double getLng() { return lon; }
+
+    public boolean getIsSpotify() { return isSpotify; }
 }

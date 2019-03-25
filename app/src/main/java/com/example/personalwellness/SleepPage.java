@@ -14,6 +14,7 @@ public class SleepPage extends AppCompatActivity {
     ResourceDB resourceDB = new ResourceDB();
     List<Resource> resources = resourceDB.getResourceList();
     Button[] button = new Button[resources.size()];
+    boolean[] isSpotify = new boolean[resources.size()];
     int index = 0;
 
     @Override
@@ -31,6 +32,10 @@ public class SleepPage extends AppCompatActivity {
                 ll.addView(button[index],
                         new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,
                                 ConstraintLayout.LayoutParams.WRAP_CONTENT));
+
+                if (resources.get(i).getIsSpotify()) {
+                    isSpotify[index] = true;
+                }
                 index++;
             }
         }
@@ -48,18 +53,35 @@ public class SleepPage extends AppCompatActivity {
         constraintSet.applyTo(ll);
 
         for (int i = 0; i < button.length; i++) {
+            System.out.print(resources.get(i).getIsSpotify());
             if (button[i] != null) {
                 button[i] = (Button) findViewById(button[i].getId());
                 final int b = button[i].getId();
-                button[i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(SleepPage.this,
-                                GriefReferralPage.class);
-                        intent.putExtra("buttonid", b + "");
-                        startActivity(intent);
-                    }
-                });
+
+                if (isSpotify[i]) {
+                    button[i].setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(SleepPage.this,
+                                    SpotifyPlayer.class);
+                            intent.putExtra("type", "sleep");
+                            startActivity(intent);
+                        }
+                    });
+                } else {
+
+                    button[i].setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(SleepPage.this,
+                                    GriefReferralPage.class);
+                            intent.putExtra("buttonid", b + "");
+                            startActivity(intent);
+                        }
+                    });
+                }
             }
         }
     }
