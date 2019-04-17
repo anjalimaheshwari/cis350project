@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 String passwordString = passwordET.getText().toString();
                 String user = getUser(usernameString);
                 Log.d(TAG, "----------- got username " + user);
-                User curr = AsyncClient.getCurrentUser();
-                CurrentUser.getCurrentUser(curr); //singleton instance of who the current user is
+                //User curr = AsyncClient.getCurrentUser();
+                CurrentUser.getCurrentUser(AsyncClient.getCurrentUser()); //singleton instance of who the current user is
 
                 curr.updateAccountNum(AsyncClient.accountNum);
                 curr.updateStress(AsyncClient.stress);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public String getUser(String username) {
+    public static String getUser(String username) {
         try {
             URL url = new URL("http://10.0.2.2:3000/person?username=" + username);
             AsyncTask<URL, String, String> task = new AsyncClient();
