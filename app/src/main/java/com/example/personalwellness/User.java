@@ -26,16 +26,11 @@ public class User {
         return username;
     }
 
-    public String getName(String id) {
-        try {
-            URL url = new URL("http://10.0.2.2:3000/api?id=" + id);
-            AsyncTask<URL, String, String> task = new AsyncClient();
-            task.execute(url);
-            String name = task.get();
-            return name;
-        } catch (Exception e) {
-            return e.toString();
-        }
+    public String getName() {
+        return name;
+    }
+    public String getPassword() {
+        return password;
     }
 
     public int getAccountNum() {
