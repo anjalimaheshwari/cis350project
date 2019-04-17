@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 String passwordString = passwordET.getText().toString();
                 String user = getUser(usernameString);
                 Log.d(TAG, "----------- got username " + user);
-                //User curr = AsyncClient.getCurrentUser();
-                CurrentUser.getCurrentUser(AsyncClient.getCurrentUser()); //singleton instance of who the current user is
+                User curr = CurrentUser.getCurrentUser(AsyncClient.getCurrentUser()); //singleton instance of who the current user is
 
                 curr.updateAccountNum(AsyncClient.accountNum);
                 curr.updateStress(AsyncClient.stress);
