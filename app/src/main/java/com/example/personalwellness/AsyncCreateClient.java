@@ -19,7 +19,7 @@ class AsyncCreateClient extends AsyncTask<URL, String, String> {
     @Override
     protected String doInBackground(URL... urls) {
         try {
-            //get the first URL from the array
+
             URL url = urls[0];
             Log.d(TAG, "----------- got url " + url);
             // create connection and send HTTP request
