@@ -43,6 +43,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String passwordString = passwordET.getText().toString();
 
                 User u = new User(nameString, usernameString, passwordString);
+                CurrentUser.getCurrentUser(u);
                 database.addUser(u);
                 Intent i = new Intent(CreateAccountActivity.this,
                         HomeActivity.class);
@@ -51,6 +52,5 @@ public class CreateAccountActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 }
