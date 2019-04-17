@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 String user = getUser(usernameString);
                 Log.d(TAG, "----------- got username " + user);
                 User curr = AsyncClient.getCurrentUser();
+                CurrentUser.getCurrentUser(curr); //singleton instance of who the current user is
 
                 curr.updateAccountNum(AsyncClient.accountNum);
                 curr.updateStress(AsyncClient.stress);
