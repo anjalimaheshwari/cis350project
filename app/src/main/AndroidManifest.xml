@@ -8,14 +8,18 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -43,7 +47,12 @@
         <activity android:name=".StressPage" />
         <activity android:name=".FitnessPage" />
         <activity android:name=".CAPSPage" />
+        <activity android:name=".RecsPage"/>
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".CreateAccountActivity"/>
+        <activity android:name=".SurveyActivity"/>
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

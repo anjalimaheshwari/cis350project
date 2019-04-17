@@ -1,9 +1,10 @@
 package com.example.personalwellness;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ResourceDB {
+public class ResourceDB implements Serializable {
     private List<User> userDB = new ArrayList<User>();
     private List<Resource> resourceList = new ArrayList<Resource>();
 
@@ -103,15 +104,15 @@ public class ResourceDB {
                 "h", "", "st",
                 "",
                 "", 1, 1, "", true));
+
         User john = new User("John Doe", "username", "password");
         john.updateCommunity(0);
-        john.updateDiet(0);
-        john.updateFitness(8);
+        //john.updateDiet(0);
+       // john.updateFitness(8);
         john.updateMentalHealth(9);
         john.updateStress(4);
         john.updateSleep(0);
         userDB.add(john);
-
     }
 
     public List<Resource> getCategoryResource(String category) {

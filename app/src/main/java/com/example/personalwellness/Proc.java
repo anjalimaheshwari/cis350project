@@ -15,8 +15,8 @@ public class Proc {
         int[] scores = new int[6];
         scores[0] = user.getCommunity();
         scores[1] = user.getMentalHealth();
-        scores[2] = user.getFitness();
-        scores[3] = user.getDiet();
+       // scores[2] = user.getFitness();
+        //scores[3] = user.getDiet();
         scores[4] = user.getSleep();
         scores[5] = user.getStress();
         //find highest

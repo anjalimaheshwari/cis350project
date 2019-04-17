@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import java.util.List;
 
+
 public class CommunityPage extends AppCompatActivity {
 
     ResourceDB resourceDB = new ResourceDB();
