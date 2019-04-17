@@ -1,5 +1,8 @@
 package com.example.personalwellness;
 
+import android.os.AsyncTask;
+
+import java.net.URL;
 import java.util.List;
 
 public class User {
@@ -23,8 +26,16 @@ public class User {
         return username;
     }
 
-    public String getName() {
-        return username;
+    public String getName(String id) {
+        try {
+            URL url = new URL("http://10.0.2.2:3000/api?id=" + id);
+            AsyncTask<URL, String, String> task = new AsyncClient();
+            task.execute(url);
+            String name = task.get();
+            return name;
+        } catch (Exception e) {
+            return e.toString();
+        }
     }
 
     public int getAccountNum() {
