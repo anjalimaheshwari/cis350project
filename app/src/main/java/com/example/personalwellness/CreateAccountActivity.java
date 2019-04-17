@@ -41,7 +41,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String nameString = nameET.getText().toString();
                 String usernameString = usernameET.getText().toString();
                 String passwordString = passwordET.getText().toString();
-
                 User u = new User(nameString, usernameString, passwordString);
                 CurrentUser.getCurrentUser(u);
                 database.addUser(u);

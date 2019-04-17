@@ -91,6 +91,10 @@ public class SurveyActivity extends AppCompatActivity {
             mQuestionNumber++;
         }
         else {
+          User curr = CurrentUser.getCurrentUser(null);
+          //add commands to upadte user with their scores.. carly will do this
+          //add here for the Async stuff !
+
           Intent i = new Intent(SurveyActivity.this, HomeActivity.class);
           startActivity(i);
         }
@@ -105,5 +109,9 @@ public class SurveyActivity extends AppCompatActivity {
             mButtonChoice2.setText(mSurvey.getChoice2(mQuestionNumber));
             mButtonChoice3.setText(mSurvey.getChoice3(mQuestionNumber));
         }
+    }
+
+    public void createUser(User user){
+
     }
 }
