@@ -41,8 +41,20 @@ public class MainActivity extends AppCompatActivity {
                 String user = getUser(usernameString);
                 Log.d(TAG, "----------- got username " + user);
                 User curr = AsyncClient.getCurrentUser();
+
+                curr.updateAccountNum(AsyncClient.accountNum);
+                curr.updateStress(AsyncClient.stress);
+                curr.updatePhysicalHealth(AsyncClient.physicalHealth);
+                curr.updateMentalHealth(AsyncClient.mentalHealth);
+                curr.updateCommunity(AsyncClient.community);
+
                 Log.d(TAG, "----------- name " + curr.getName());
                 Log.d(TAG, "----------- username " + curr.getUserName());
+                Log.d(TAG, "----------- ph " + curr.getPhysicalHealth());
+                Log.d(TAG, "----------- stress " + curr.getStress());
+                Log.d(TAG, "----------- community " + curr.getCommunity());
+                Log.d(TAG, "----------- accountNum " + curr.getAccountNum());
+                Log.d(TAG, "----------- mh " + curr.getMentalHealth());
 
                 //User u = checkValidUser(usernameString, passwordString);
                 if (checkValidUser(passwordString, curr.getPassword())) {

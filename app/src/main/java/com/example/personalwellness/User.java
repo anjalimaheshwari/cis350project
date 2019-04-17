@@ -8,18 +8,13 @@ import java.util.List;
 public class User {
 
     private String name, username, password;
-    private int accountNum = 0 , mentalHealth = 0, stress = 0, diet = 0,
-            fitness = 0, community = 0, sleep = 0;
+    private int accountNum = 0 , mentalHealth = 0, stress = 0, physicalHealth = 0, community = 0, sleep = 0;
     private List<Resource> personalRecs = null;
-
-    private static int uniqueNum = 0;
 
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.accountNum = uniqueNum;
-        uniqueNum++;
     }
 
     public String getUserName() {
@@ -45,12 +40,8 @@ public class User {
         return stress;
     }
 
-    public int getDiet() {
-        return diet;
-    }
-
-    public int getFitness() {
-        return fitness;
+    public int getPhysicalHealth() {
+        return physicalHealth;
     }
 
     public int getSleep() {
@@ -66,30 +57,30 @@ public class User {
     }
 
     public void updateStress(int update) {
-        stress += update;
+        stress = update;
     }
 
     public void updateMentalHealth(int update) {
-        mentalHealth += update;
+        mentalHealth = update;
     }
 
-    public void updateDiet(int update) {
-        diet += update;
-    }
-
-    public void updateFitness(int update) {
-        fitness += update;
+    public void updatePhysicalHealth(int update) {
+        physicalHealth = update;
     }
 
     public void updateSleep(int update) {
-        sleep += update;
+        sleep = update;
     }
 
     public void updateCommunity(int update) {
-        community += update;
+        community = update;
     }
 
     public void updatePersonalRecs(List<Resource> personalRecs) { this.personalRecs = personalRecs; }
+
+    public void updateAccountNum(int update) {
+        accountNum = update;
+    }
 
 
 

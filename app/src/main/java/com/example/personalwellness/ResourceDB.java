@@ -107,8 +107,8 @@ public class ResourceDB implements Serializable {
 
         User john = new User("John Doe", "username", "password");
         john.updateCommunity(0);
-        john.updateDiet(0);
-        john.updateFitness(8);
+        //john.updateDiet(0);
+       // john.updateFitness(8);
         john.updateMentalHealth(9);
         john.updateStress(4);
         john.updateSleep(0);

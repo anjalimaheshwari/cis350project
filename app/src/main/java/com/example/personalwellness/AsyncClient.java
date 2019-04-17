@@ -12,7 +12,14 @@ import java.util.Scanner;
 
 public class AsyncClient extends AsyncTask<URL, String, String> {
 
-    private static User curr = null;
+    public static User curr = null;
+    public static int mentalHealth = 0;
+    public static int physicalHealth = 0;
+    public static int stress = 0;
+    public static int community = 0;
+    public static int accountNum = 0;
+
+
 
     private static final String TAG = AsyncClient.class.getSimpleName();
 
@@ -74,6 +81,63 @@ public class AsyncClient extends AsyncTask<URL, String, String> {
             }
         }
         if (name != null && username != null && password != null) {
+            User u = new User(name, username, password);
+            for (String s : userInfo) {
+                String[] pieces = s.split("'");
+                if (pieces.length >= 3) {
+                    if (pieces[1].equals("stress")) {
+
+                        try {
+                            stress = Integer.parseInt(pieces[3]);
+                        } catch (Exception e) {
+
+                        };
+                    }
+
+                    if (pieces[1].equals("physicalHealth")) {
+
+                        try {
+                            physicalHealth = Integer.parseInt(pieces[3]);
+                        } catch (Exception e) {
+
+                        };
+                    }
+
+
+                    if (pieces[1].equals("mentalHealth")) {
+
+                        try {
+                            mentalHealth = Integer.parseInt(pieces[3]);
+                        } catch (Exception e) {
+
+                        };
+                    }
+
+
+                    if (pieces[1].equals("accountNum")) {
+
+                        try {
+                            accountNum = Integer.parseInt(pieces[3]);
+                        } catch (Exception e) {
+
+                        };
+                    }
+
+
+                    if (pieces[1].equals("community")) {
+
+                        try {
+                            community = Integer.parseInt(pieces[3]);
+                        } catch (Exception e) {
+
+                        };
+                    }
+
+
+
+                }
+            }
+
             return new User(name, username, password);
         }
         return null;
