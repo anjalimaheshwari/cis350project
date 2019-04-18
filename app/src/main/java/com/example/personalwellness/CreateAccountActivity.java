@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.Serializable;
 
@@ -14,6 +15,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private ResourceDB database;
     private EditText nameET, usernameET, passwordET;
     private Button backButton, registerButton;
+    private TextView errorTV;
 
 
     @Override
@@ -22,6 +24,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         database = (ResourceDB) getIntent().getSerializableExtra("database");
+        errorTV = (TextView) findViewById(R.id.caErrorText);
         nameET = (EditText) findViewById(R.id.caNameEditText);
         usernameET = (EditText) findViewById(R.id.caUsernameEditText);
         passwordET = (EditText) findViewById(R.id.caPasswordEditText);
@@ -41,14 +44,19 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String nameString = nameET.getText().toString();
                 String usernameString = usernameET.getText().toString();
                 String passwordString = passwordET.getText().toString();
-                User u = new User(nameString, usernameString, passwordString);
-                CurrentUser.getCurrentUser(u);
-                database.addUser(u);
-                Intent i = new Intent(CreateAccountActivity.this,
-                        HomeActivity.class);
-                i.putExtra("accountNum", u.getAccountNum());
-                i.putExtra("database", database);
-                startActivity(i);
+                String takenUsername = MainActivity.getUser(usernameString);
+                if (takenUsername != null) {
+                    errorTV.setText("Error: username already taken. Please enter another one.");
+                    usernameET.setText("");
+                } else {
+                    User u = new User(nameString, usernameString, passwordString);
+                    CurrentUser.getCurrentUser(u);
+                    Intent i = new Intent(CreateAccountActivity.this,
+                            HomeActivity.class);
+                    i.putExtra("accountNum", u.getAccountNum());
+                    i.putExtra("database", database);
+                    startActivity(i);
+                }
             }
         });
     }

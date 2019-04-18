@@ -1,15 +1,15 @@
 package com.example.personalwellness;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.HashMap;
 
 public class SurveyActivity extends AppCompatActivity {
@@ -104,6 +104,7 @@ public class SurveyActivity extends AppCompatActivity {
             curr.updateCommunity(community);
             curr.updatePhysicalHealth(ph);
             //add here for the Async stuff!
+            createUser(curr);
             Intent i = new Intent(SurveyActivity.this, HomeActivity.class);
             startActivity(i);
         }
@@ -120,7 +121,22 @@ public class SurveyActivity extends AppCompatActivity {
         }
     }
 
-    public void createUser(User user) {
-
+    public String createUser(User user) {
+        try {
+            URL url = new URL("http://10.0.2.2:3000/create/app?username=" + user.getUserName()
+                    + "&password=" + user.getPassword()
+                    + "&name=" + user.getName()
+                    + "&mentalHealth=" + user.getMentalHealth()
+                    + "&stress=" + user.getStress()
+                    + "&physicalHealth" + user.getPhysicalHealth()
+                    + "&community" + user.getCommunity()
+                    + "&sleep" + user.getSleep());
+            AsyncTask<URL, String, String> task = new AsyncCreateClient();
+            task.execute(url);
+            System.out.print("here the sequel");
+            return "";
+        } catch (Exception e) {
+            return e.toString();
+        }
     }
 }
