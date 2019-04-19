@@ -104,7 +104,7 @@ public class SurveyActivity extends AppCompatActivity {
             curr.updateCommunity(community);
             curr.updatePhysicalHealth(ph);
             //add here for the Async stuff!
-            createUser(curr);
+            createNewUser(curr);
             Intent i = new Intent(SurveyActivity.this, HomeActivity.class);
             startActivity(i);
         }
@@ -121,19 +121,12 @@ public class SurveyActivity extends AppCompatActivity {
         }
     }
 
-    public String createUser(User user) {
+    public String createNewUser(User user) {
         try {
-            URL url = new URL("http://10.0.2.2:3000/create/app?username=" + user.getUserName()
-                    + "&password=" + user.getPassword()
-                    + "&name=" + user.getName()
-                    + "&mentalHealth=" + user.getMentalHealth()
-                    + "&stress=" + user.getStress()
-                    + "&physicalHealth" + user.getPhysicalHealth()
-                    + "&community" + user.getCommunity()
-                    + "&sleep" + user.getSleep());
+            URL url = new URL("http://10.0.2.2:3000/create");
             AsyncTask<URL, String, String> task = new AsyncCreateClient();
             task.execute(url);
-            System.out.print("here the sequel");
+            Log.d(TAG, "----------- reached createUser ");
             return "";
         } catch (Exception e) {
             return e.toString();

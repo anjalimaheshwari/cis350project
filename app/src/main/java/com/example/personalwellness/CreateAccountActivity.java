@@ -3,6 +3,7 @@ package com.example.personalwellness;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        database = (ResourceDB) getIntent().getSerializableExtra("database");
+        Log.d("Yaw", "Got here in CreateAccount");
+
+
         errorTV = (TextView) findViewById(R.id.caErrorText);
         nameET = (EditText) findViewById(R.id.caNameEditText);
         usernameET = (EditText) findViewById(R.id.caUsernameEditText);
@@ -44,20 +47,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String nameString = nameET.getText().toString();
                 String usernameString = usernameET.getText().toString();
                 String passwordString = passwordET.getText().toString();
-                String takenUsername = MainActivity.getUser(usernameString);
-                if (takenUsername != null) {
+                //String takenUsername = MainActivity.getUser(usernameString);
+               /* if (takenUsername != null) {
                     errorTV.setText("Error: username already taken. Please enter another one.");
                     usernameET.setText("");
-                } else {
+                } else { */
                     User u = new User(nameString, usernameString, passwordString);
                     CurrentUser.getCurrentUser(u);
                     Intent i = new Intent(CreateAccountActivity.this,
-                            HomeActivity.class);
-                    i.putExtra("accountNum", u.getAccountNum());
-                    i.putExtra("database", database);
+                            SurveyActivity.class);
                     startActivity(i);
                 }
-            }
+           //}
         });
     }
 }

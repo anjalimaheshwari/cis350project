@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 //User u = checkValidUser(usernameString, passwordString);
                 if (checkValidUser(passwordString, curr.getPassword())) {
                     Intent i = new Intent(MainActivity.this,
-                            SurveyActivity.class);
+                            HomeActivity.class);
                     i.putExtra("accountNum", curr.getAccountNum());
                     startActivity(i);
                 }
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i2 = new Intent(MainActivity.this,
                         CreateAccountActivity.class);
-                i2.putExtra("database", database);
+                Log.d(TAG, "Got here in Main");
                 startActivity(i2);
             }
         });
@@ -89,11 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static String getUser(String username) {
         try {
+            Log.d(TAG, "----------- entering main activity get user ");
             URL url = new URL("http://10.0.2.2:3000/person?username=" + username);
             AsyncTask<URL, String, String> task = new AsyncClient();
             task.execute(url);
             String name = task.get();
-            System.out.print("here");
             return name;
         } catch (Exception e) {
             return e.toString();

@@ -8,9 +8,9 @@ public class CurrentUser {
         this.user = user;
     }
 
-    public static User getCurrentUser (User user) {
+    public static User getCurrentUser (User u) {
         if (curr == null) {
-            curr = new CurrentUser(user);
+            curr = new CurrentUser(u);
         }
         return user;
     }
