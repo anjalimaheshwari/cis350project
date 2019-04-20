@@ -39,7 +39,7 @@ class AsyncCreateClient extends AsyncTask<URL, String, String> {
             conn.setDoInput(true);
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            //setPostRequestContent(conn, jsonObject);
+
             conn.setChunkedStreamingMode(0);
             conn.connect();
             // get the current user to add to mongo
@@ -53,7 +53,7 @@ class AsyncCreateClient extends AsyncTask<URL, String, String> {
             jsonBody.put("physicalHealth",curr.getPhysicalHealth());
             jsonBody.put("sleep",curr.getSleep());
             jsonBody.put("community",curr.getCommunity());
-            Log.d(TAG, "Create----------- created JSON " + jsonBody);
+            Log.d(TAG, "Create----------- created JSON " + jsonBody.toString());
 
             OutputStream out = new BufferedOutputStream(conn.getOutputStream());
 
@@ -64,10 +64,6 @@ class AsyncCreateClient extends AsyncTask<URL, String, String> {
             out.close();
 
             conn.disconnect();
-
-
-
-
             return "";
         }catch (Exception e) {
             return e.toString();
