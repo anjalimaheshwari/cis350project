@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 
 import java.io.Serializable;
 
@@ -17,6 +20,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText nameET, usernameET, passwordET;
     private Button backButton, registerButton;
     private TextView errorTV;
+    final Context context = this;
+    private Button alertButton;
 
 
     @Override
@@ -47,18 +52,40 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String nameString = nameET.getText().toString();
                 String usernameString = usernameET.getText().toString();
                 String passwordString = passwordET.getText().toString();
-                //String takenUsername = MainActivity.getUser(usernameString);
-               /* if (takenUsername != null) {
-                    errorTV.setText("Error: username already taken. Please enter another one.");
-                    usernameET.setText("");
-                } else { */
+                Log.d("Yaw", "pw " + passwordString + " pw");
+                if (passwordString == null || usernameString == null || nameString == null ||
+                passwordString.equals("") || usernameString.equals("") || nameString.equals("")) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(CreateAccountActivity.this).create();
+                    alertDialog.setTitle("Error");
+                    alertDialog.setMessage("Please fill all fields");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+                String takenUsername = MainActivity.getUser(usernameString);
+                if (takenUsername == null || takenUsername.equals("")) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(CreateAccountActivity.this).create();
+                    alertDialog.setTitle("Error");
+                    alertDialog.setMessage("Username is taken");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                } else {
                     User u = new User(nameString, usernameString, passwordString);
                     CurrentUser.getCurrentUser(u);
                     Intent i = new Intent(CreateAccountActivity.this,
                             SurveyActivity.class);
                     startActivity(i);
                 }
-           //}
+            }
         });
     }
 }

@@ -1,5 +1,7 @@
 package com.example.personalwellness;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
@@ -39,31 +41,55 @@ public class MainActivity extends AppCompatActivity {
                 String usernameString = usernameET.getText().toString();
                 String passwordString = passwordET.getText().toString();
                 String user = getUser(usernameString);
-                Log.d(TAG, "----------- got username " + user);
-                //User curr = AsyncClient.getCurrentUser();
-                User curr = CurrentUser.getCurrentUser(AsyncClient.getCurrentUser()); //singleton instance of who the current user is
+                if ( user == null || user.equals("")) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                    alertDialog.setTitle("Error");
+                    alertDialog.setMessage("Invalid username or password");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                } else {
+                    Log.d(TAG, "----------- got username " + user + " name");
+                    //User curr = AsyncClient.getCurrentUser();
+                    User curr = CurrentUser.getCurrentUser(AsyncClient.getCurrentUser()); //singleton instance of who the current user is
+                    curr.updateAccountNum(AsyncClient.accountNum);
+                    curr.updateStress(AsyncClient.stress);
+                    curr.updatePhysicalHealth(AsyncClient.physicalHealth);
+                    curr.updateMentalHealth(AsyncClient.mentalHealth);
+                    curr.updateCommunity(AsyncClient.community);
 
-                curr.updateAccountNum(AsyncClient.accountNum);
-                curr.updateStress(AsyncClient.stress);
-                curr.updatePhysicalHealth(AsyncClient.physicalHealth);
-                curr.updateMentalHealth(AsyncClient.mentalHealth);
-                curr.updateCommunity(AsyncClient.community);
+                    Log.d(TAG, "----------- name " + curr.getName());
+                    Log.d(TAG, "----------- username " + curr.getUserName());
+                    Log.d(TAG, "----------- ph " + curr.getPhysicalHealth());
+                    Log.d(TAG, "----------- stress " + curr.getStress());
+                    Log.d(TAG, "----------- community " + curr.getCommunity());
+                    Log.d(TAG, "----------- accountNum " + curr.getAccountNum());
+                    Log.d(TAG, "----------- mh " + curr.getMentalHealth());
 
-                Log.d(TAG, "----------- name " + curr.getName());
-                Log.d(TAG, "----------- username " + curr.getUserName());
-                Log.d(TAG, "----------- ph " + curr.getPhysicalHealth());
-                Log.d(TAG, "----------- stress " + curr.getStress());
-                Log.d(TAG, "----------- community " + curr.getCommunity());
-                Log.d(TAG, "----------- accountNum " + curr.getAccountNum());
-                Log.d(TAG, "----------- mh " + curr.getMentalHealth());
-
-                //User u = checkValidUser(usernameString, passwordString);
-                if (checkValidUser(passwordString, curr.getPassword())) {
-                    Intent i = new Intent(MainActivity.this,
-                            HomeActivity.class);
-                    i.putExtra("accountNum", curr.getAccountNum());
-                    startActivity(i);
+                    //User u = checkValidUser(usernameString, passwordString);
+                    if (checkValidUser(passwordString, curr.getPassword())) {
+                        Intent i = new Intent(MainActivity.this,
+                                HomeActivity.class);
+                        i.putExtra("accountNum", curr.getAccountNum());
+                        startActivity(i);
+                    } else {
+                        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                        alertDialog.setTitle("Error");
+                        alertDialog.setMessage("Invalid username or password");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
                 }
+
             }
         });
 
