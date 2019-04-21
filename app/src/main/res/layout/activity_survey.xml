@@ -13,14 +13,14 @@
         android:layout_marginBottom="0dp">
 
         <TextView
+            android:id="@+id/question_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Question"
-            android:textSize="20sp"
-            android:textColor="#060b9e"
             android:layout_alignParentLeft="true"
-            android:layout_weight = "1"
-            android:id="@+id/question_text"/>
+            android:layout_weight="1"
+            android:text="Question"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,45 +33,46 @@
             android:textSize="20sp"/>
 
     </RelativeLayout>
+
     <TextView
+        android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="How are you feeling today?"
-        android:textSize="16sp"
-        android:textColor="#060b9e"
-        android:layout_weight = "1"
-        android:id="@+id/question"/>
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="16sp" />
 
 
     <Button
+        android:id="@+id/choice1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="placeholder"
-        android:background="#2f86ff"
-        android:textColor="#fff"
         android:layout_marginBottom="10dp"
-        android:layout_weight = "1"
-        android:id="@+id/choice1"/>
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:text="placeholder"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     <Button
+        android:id="@+id/choice2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="placeholder"
-        android:background="#2f86ff"
-        android:textColor="#fff"
         android:layout_marginBottom="10dp"
-        android:layout_weight = "1"
-        android:id="@+id/choice2"/>
+        android:layout_weight="1"
+        android:background="#FFAEF0E9"
+        android:text="placeholder"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     <Button
+        android:id="@+id/choice3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="placeholder"
-        android:background="#2f86ff"
-        android:textColor="#fff"
         android:layout_marginBottom="10dp"
-        android:layout_weight = "1"
-        android:id="@+id/choice3"/>
+        android:layout_weight="1"
+        android:background="#FFAEF0E9"
+        android:text="placeholder"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     <Button
         android:layout_width="match_parent"
