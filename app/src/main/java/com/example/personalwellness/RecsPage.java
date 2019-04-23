@@ -15,7 +15,8 @@ public class RecsPage extends AppCompatActivity {
     ResourceDB resourceDB = new ResourceDB();
     //List<Resource> resources = resourceDB.getResourceList();
     Proc proc = new Proc(resourceDB);
-    List<Resource> recommentations = proc.getRecs(CurrentUser.getCurrentUser(null));
+    User u = null;
+    List<Resource> recommentations = proc.getRecs(u);
     Button[] button = new Button[recommentations.size()];
 
     @Override

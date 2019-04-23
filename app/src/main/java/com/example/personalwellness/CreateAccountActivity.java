@@ -1,6 +1,7 @@
 package com.example.personalwellness;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import java.io.Serializable;
+import java.net.URL;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -52,7 +54,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String nameString = nameET.getText().toString();
                 String usernameString = usernameET.getText().toString();
                 String passwordString = passwordET.getText().toString();
-                Log.d("Yaw", "pw " + passwordString + " pw");
+
                 if (passwordString == null || usernameString == null || nameString == null ||
                 passwordString.equals("") || usernameString.equals("") || nameString.equals("")) {
                     AlertDialog alertDialog = new AlertDialog.Builder(CreateAccountActivity.this).create();
@@ -66,8 +68,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                             });
                     alertDialog.show();
                 }
-                String takenUsername = MainActivity.getUser(usernameString);
-                if (takenUsername == null || takenUsername.equals("")) {
+                String realUser = "";
+                try {
+                    Log.d("create account ", "----------- checking for existing username ");
+                    URL url = new URL("http://10.0.2.2:3001/person?username=" + usernameString);
+                    AsyncTask<URL, String, String> task = new AsyncClientCheckForUser();
+                    task.execute(url);
+                    realUser = task.get();
+                } catch (Exception e) {
+
+                }
+                if (realUser.equals("bad")) {
                     AlertDialog alertDialog = new AlertDialog.Builder(CreateAccountActivity.this).create();
                     alertDialog.setTitle("Error");
                     alertDialog.setMessage("Username is taken");
@@ -79,8 +90,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                             });
                     alertDialog.show();
                 } else {
-                    User u = new User(nameString, usernameString, passwordString);
-                    CurrentUser.getCurrentUser(u);
+                    CurrentUser curr = CurrentUser.getCurrentUser();
+                    curr.updateName(nameString);
+                    curr.updateUsername(usernameString);
+                    curr.updatePassword(passwordString);
                     Intent i = new Intent(CreateAccountActivity.this,
                             SurveyActivity.class);
                     startActivity(i);

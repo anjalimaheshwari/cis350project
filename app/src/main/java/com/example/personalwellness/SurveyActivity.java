@@ -90,7 +90,7 @@ public class SurveyActivity extends AppCompatActivity {
             mQuestionNumberView.setText(mQuestionNumber + "");
             mQuestionNumber++;
         } else {
-            User curr = CurrentUser.getCurrentUser(null);
+            CurrentUser curr = CurrentUser.getCurrentUser();
             //analysis of survey answers
             //these are dummy values! 
             int stress = 9;
@@ -103,8 +103,8 @@ public class SurveyActivity extends AppCompatActivity {
             curr.updateMentalHealth(mentalHealth);
             curr.updateCommunity(community);
             curr.updatePhysicalHealth(ph);
-            //add here for the Async stuff!
-            createUser(curr);
+
+            createUser();
             Intent i = new Intent(SurveyActivity.this, HomeActivity.class);
             startActivity(i);
         }
@@ -121,9 +121,10 @@ public class SurveyActivity extends AppCompatActivity {
         }
     }
 
-    public String createUser(User user) {
+    public String createUser() {
         try {
-            URL url = new URL("http://10.0.2.2:3000/jazz" + "?username=" + user.getUserName()
+            CurrentUser user = CurrentUser.getCurrentUser();
+            URL url = new URL("http://10.0.2.2:3001/jazz" + "?username=" + user.getUserName()
                     + "&password=" + user.getPassword()
                     + "&name=" + user.getName()
                     + "&mentalHealth=" + user.getMentalHealth()

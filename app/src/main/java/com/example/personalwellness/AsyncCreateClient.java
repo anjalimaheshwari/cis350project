@@ -43,7 +43,7 @@ class AsyncCreateClient extends AsyncTask<URL, String, String> {
             conn.setChunkedStreamingMode(0);
             conn.connect();
             // get the current user to add to mongo
-            User curr = CurrentUser.getCurrentUser(null);
+            CurrentUser curr = CurrentUser.getCurrentUser();
 
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("name",curr.getName());

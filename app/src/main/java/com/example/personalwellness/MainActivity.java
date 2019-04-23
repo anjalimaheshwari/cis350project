@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private ResourceDB database;
     private EditText usernameET, passwordET;
     private Button loginButton, createAccountButton;
+    public String usernameString;
+    public String passwordString;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -38,10 +40,15 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String usernameString = usernameET.getText().toString();
-                String passwordString = passwordET.getText().toString();
-                String user = getUser(usernameString);
-                if ( user == null || user.equals("")) {
+                usernameString = usernameET.getText().toString();
+                passwordString = passwordET.getText().toString();
+
+                CurrentUser curr = CurrentUser.getCurrentUser();
+
+                // this will populate the singleton user class
+                getUser(usernameString);
+
+                if (curr.getUserName() == null) {
                     AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                     alertDialog.setTitle("Error");
                     alertDialog.setMessage("Invalid username or password");
@@ -53,30 +60,15 @@ public class MainActivity extends AppCompatActivity {
                             });
                     alertDialog.show();
                 } else {
-                    Log.d(TAG, "----------- got username " + user + " name");
-                    //User curr = AsyncClient.getCurrentUser();
-                    User curr = CurrentUser.getCurrentUser(AsyncClient.getCurrentUser()); //singleton instance of who the current user is
-                    curr.updateAccountNum(AsyncClient.accountNum);
-                    curr.updateStress(AsyncClient.stress);
-                    curr.updatePhysicalHealth(AsyncClient.physicalHealth);
-                    curr.updateMentalHealth(AsyncClient.mentalHealth);
-                    curr.updateCommunity(AsyncClient.community);
 
-                    Log.d(TAG, "----------- name " + curr.getName());
-                    Log.d(TAG, "----------- username " + curr.getUserName());
-                    Log.d(TAG, "----------- ph " + curr.getPhysicalHealth());
-                    Log.d(TAG, "----------- stress " + curr.getStress());
-                    Log.d(TAG, "----------- community " + curr.getCommunity());
-                    Log.d(TAG, "----------- accountNum " + curr.getAccountNum());
-                    Log.d(TAG, "----------- mh " + curr.getMentalHealth());
-
-                    //User u = checkValidUser(usernameString, passwordString);
                     if (checkValidUser(passwordString, curr.getPassword())) {
                         Intent i = new Intent(MainActivity.this,
                                 HomeActivity.class);
                         i.putExtra("accountNum", curr.getAccountNum());
                         startActivity(i);
                     } else {
+                        Log.d(TAG, "----------- mh " + curr.getPassword());
+
                         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                         alertDialog.setTitle("Error");
                         alertDialog.setMessage("Invalid username or password");
@@ -116,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     public static String getUser(String username) {
         try {
             Log.d(TAG, "----------- entering main activity get user ");
-            URL url = new URL("http://10.0.2.2:3000/person?username=" + username);
+            URL url = new URL("http://10.0.2.2:3001/person?username=" + username);
             AsyncTask<URL, String, String> task = new AsyncClient();
             task.execute(url);
             String name = task.get();
