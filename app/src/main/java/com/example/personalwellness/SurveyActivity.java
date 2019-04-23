@@ -81,6 +81,10 @@ public class SurveyActivity extends AppCompatActivity {
 
     }
 
+    /*
+    Method will update the question if the user has not finished the survey. Else,
+    it will create a new user in the database and segue to the home screen
+     */
     private void updateQuestion() {
         if (mSurvey.checkQuestionAvailable(mQuestionNumber)) {
             mQuestionView.setText(mSurvey.getQuestion(mQuestionNumber));
@@ -90,6 +94,8 @@ public class SurveyActivity extends AppCompatActivity {
             mQuestionNumberView.setText(mQuestionNumber + "");
             mQuestionNumber++;
         } else {
+
+            // if we have completed all questions in the survey, create the new user
             CurrentUser curr = CurrentUser.getCurrentUser();
             //analysis of survey answers
             //these are dummy values! 
@@ -104,12 +110,16 @@ public class SurveyActivity extends AppCompatActivity {
             curr.updateCommunity(community);
             curr.updatePhysicalHealth(ph);
 
+            // create the user in the database
             createUser();
+
             Intent i = new Intent(SurveyActivity.this, HomeActivity.class);
             startActivity(i);
         }
     }
-
+    /*
+    Method handles the "previous question" button
+     */
     private void previousQuestion() {
         if (mQuestionNumber > 0) {
             mQuestionNumber--;
@@ -120,8 +130,10 @@ public class SurveyActivity extends AppCompatActivity {
             mButtonChoice3.setText(mSurvey.getChoice3(mQuestionNumber));
         }
     }
-
-    public String createUser() {
+    /*
+    Method calls our async task to create a new user in the database
+     */
+    public void createUser() {
         try {
             CurrentUser user = CurrentUser.getCurrentUser();
             URL url = new URL("http://10.0.2.2:3001/jazz" + "?username=" + user.getUserName()
@@ -135,9 +147,7 @@ public class SurveyActivity extends AppCompatActivity {
             AsyncTask<URL, String, String> task = new AsyncCreateClient();
             task.execute(url);
             Log.d(TAG, "----------- reached createUser " + url);
-            return "";
         } catch (Exception e) {
-            return e.toString();
         }
     }
 }

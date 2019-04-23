@@ -18,6 +18,11 @@ public class AsyncClientCheckForUser extends AsyncTask<URL, String, String> {
 
     private static final String TAG = AsyncClientCheckForUser.class.getSimpleName();
 
+    /*
+    Method checks whether or not a username exists in the database. If this method returns
+    "bad", then the user does exist. If this method returns "good", then the user
+    does not exist in the database.
+     */
     protected String doInBackground(URL... urls) {
         try {
             //get the first URL from the array
@@ -32,13 +37,15 @@ public class AsyncClientCheckForUser extends AsyncTask<URL, String, String> {
             Scanner in = new Scanner(url.openStream());
             String msg = in.nextLine();
 
-            ArrayList<String> userInfo = new ArrayList<>();
             boolean realUser = false;
+
+            // check to see if the user exists in the database
             while (in.hasNextLine()) {
                 if (in.nextLine().contains("username")) {
                     realUser = true;
                 }
             }
+
             if (realUser) {
                 return "bad";
             }

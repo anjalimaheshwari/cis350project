@@ -55,6 +55,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String usernameString = usernameET.getText().toString();
                 String passwordString = passwordET.getText().toString();
 
+                // check to make sure that the user has filled all of the fields to create an account
                 if (passwordString == null || usernameString == null || nameString == null ||
                 passwordString.equals("") || usernameString.equals("") || nameString.equals("")) {
                     AlertDialog alertDialog = new AlertDialog.Builder(CreateAccountActivity.this).create();
@@ -68,6 +69,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             });
                     alertDialog.show();
                 }
+                // check to see if the username is taken
                 String realUser = "";
                 try {
                     Log.d("create account ", "----------- checking for existing username ");
@@ -78,6 +80,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
+                // if the username is taken...
                 if (realUser.equals("bad")) {
                     AlertDialog alertDialog = new AlertDialog.Builder(CreateAccountActivity.this).create();
                     alertDialog.setTitle("Error");
@@ -90,6 +93,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             });
                     alertDialog.show();
                 } else {
+                    // create the user and segue to the survey
                     CurrentUser curr = CurrentUser.getCurrentUser();
                     curr.updateName(nameString);
                     curr.updateUsername(usernameString);

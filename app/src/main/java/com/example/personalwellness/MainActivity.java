@@ -43,15 +43,23 @@ public class MainActivity extends AppCompatActivity {
                 usernameString = usernameET.getText().toString();
                 passwordString = passwordET.getText().toString();
 
-                CurrentUser curr = CurrentUser.getCurrentUser();
+                // check if the user exists in the database
+                String realUser = "";
+                try {
+                    Log.d("create account ", "----------- checking for existing username ");
+                    URL url = new URL("http://10.0.2.2:3001/person?username=" + usernameString);
+                    AsyncTask<URL, String, String> task = new AsyncClientCheckForUser();
+                    task.execute(url);
+                    realUser = task.get();
+                } catch (Exception e) {
 
-                // this will populate the singleton user class
-                getUser(usernameString);
+                }
 
-                if (curr.getUserName() == null) {
+                // if the user does not exist in the database...
+                if (realUser.equals("good")) {
                     AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                     alertDialog.setTitle("Error");
-                    alertDialog.setMessage("Invalid username or password");
+                    alertDialog.setMessage("Invalid user");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -61,17 +69,23 @@ public class MainActivity extends AppCompatActivity {
                     alertDialog.show();
                 } else {
 
+                    // if the user does exist in the database, create the singleton object
+                    CurrentUser curr = CurrentUser.getCurrentUser();
+
+                    // this will populate the singleton user class
+                    getUser(usernameString);
+
+                    // check for correct password
                     if (checkValidUser(passwordString, curr.getPassword())) {
                         Intent i = new Intent(MainActivity.this,
                                 HomeActivity.class);
                         i.putExtra("accountNum", curr.getAccountNum());
                         startActivity(i);
                     } else {
-                        Log.d(TAG, "----------- mh " + curr.getPassword());
-
+                        // if the user has entered a bad password...
                         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                         alertDialog.setTitle("Error");
-                        alertDialog.setMessage("Invalid username or password");
+                        alertDialog.setMessage("Invalid password");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -85,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // if the user clicks the create account button, segue to the create account activity page
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+    Method checks if the password entered by the user matches the one in the database
+     */
     private boolean checkValidUser(String inputPassword, String truePassword) {
         if (truePassword.equals(inputPassword)) {
             Log.d(TAG, "----------- good pw");
@@ -104,7 +122,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
+    /*
+    Method calls our async task to populate the current user singleton object
+     */
     public static String getUser(String username) {
         try {
             Log.d(TAG, "----------- entering main activity get user ");
