@@ -100,6 +100,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                     curr.updatePassword(passwordString);
                     Intent i = new Intent(CreateAccountActivity.this,
                             SurveyActivity.class);
+                    Log.d("currName", curr.getName());
+                    i.putExtra("currName", curr.getName());
                     startActivity(i);
                 }
             }

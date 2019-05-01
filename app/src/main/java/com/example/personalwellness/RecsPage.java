@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,32 +14,37 @@ import java.util.List;
 public class RecsPage extends AppCompatActivity {
 
     ResourceDB resourceDB = new ResourceDB();
-    //List<Resource> resources = resourceDB.getResourceList();
-    Proc proc = new Proc(resourceDB);
-    User u = null;
-    List<Resource> recommentations = proc.getRecs(u);
-    Button[] button = new Button[recommentations.size()];
+    List<Resource> resources = resourceDB.getResourceList();
+    int index = 0;
+
+    CurrentUser user = CurrentUser.getCurrentUser();
+//    List<Resource> recommendations = proc.getRecs(user);
+    Button[] button = new Button[resources.size()];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_page);
-
+        String extra = getIntent().getStringExtra("maxCategory");
+        Log.d("-------recspage", extra);
         ConstraintLayout ll = (ConstraintLayout) findViewById(R.id.constraint_layout);
 
-        for (int i = 0; i < recommentations.size(); i++) {
-            button[i] = new Button(this);
-            button[i].setId(i+1);
-            button[i].setText(recommentations.get(i).getName());
-            ll.addView(button[i],
-                    new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT));
+        for (int i = 0; i < resources.size(); i++) {
+            if (resources.get(i).getCategory().equals(extra)) {
+                button[index] = new Button(this);
+                button[index].setId(i+1);
+                button[index].setText(resources.get(i).getName());
+                ll.addView(button[index],
+                        new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,
+                                ConstraintLayout.LayoutParams.WRAP_CONTENT));
+                index++;
+            }
         }
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(ll);
 
-        for (int i = 0; i < recommentations.size()-1; i++) {
+        for (int i = 0; i < index-1; i++) {
             if (button[i] != null) {
                 constraintSet.connect(button[i].getId(), ConstraintSet.TOP, button[i+1].getId(),
                         ConstraintSet.BOTTOM);

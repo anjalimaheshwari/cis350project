@@ -18,7 +18,6 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ResourceDB database;
     private EditText usernameET, passwordET;
     private Button loginButton, createAccountButton;
     public String usernameString;
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        database = new ResourceDB();
         usernameET = (EditText) findViewById(R.id.usernameEditText);
         passwordET = (EditText) findViewById(R.id.passwordEditText);
         loginButton = (Button) findViewById(R.id.loginButton);
@@ -79,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     if (checkValidUser(passwordString, curr.getPassword())) {
                         Intent i = new Intent(MainActivity.this,
                                 HomeActivity.class);
+                        i.putExtra("community", curr.getCommunity());
                         i.putExtra("accountNum", curr.getAccountNum());
                         startActivity(i);
                     } else {
@@ -106,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i2 = new Intent(MainActivity.this,
                         CreateAccountActivity.class);
                 Log.d(TAG, "Got here in Main");
+//                i2.putExtra("community", curr.getCommunity());
                 startActivity(i2);
             }
         });

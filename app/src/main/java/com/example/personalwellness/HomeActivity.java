@@ -14,6 +14,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        String extra = getIntent().getStringExtra("maxScore");
+        Log.d("-----------------max Score", extra);
 
         Button capsButton = (Button) findViewById(R.id.mentalhealth);
         capsButton.setOnClickListener(new View.OnClickListener() {
@@ -75,9 +77,10 @@ public class HomeActivity extends AppCompatActivity {
         recsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent int7 = new Intent(HomeActivity.this,SleepPage.class);
+                Intent int7 = new Intent(HomeActivity.this,RecsPage.class);
+                int7.putExtra("maxCategory", extra);
+                Log.d("------------extra", extra);
                 startActivity(int7);
-                Log.d(TAG, "-----------creating map");
             }
         });
     }

@@ -25,13 +25,17 @@ public class SurveyActivity extends AppCompatActivity {
     private int mQuestionNumber = 0;
 
     private static final String TAG = SurveyActivity.class.getSimpleName();
-
+    ResourceDB resourceDB = new ResourceDB();
+    Proc proc = new Proc(resourceDB);
     private HashMap<Integer, String> surveyResponses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+        String extra = getIntent().getStringExtra("currName");
+        Log.d("---------------survey has name", extra);
+        CurrentUser curr = CurrentUser.getCurrentUser();
 
         surveyResponses = new HashMap<Integer, String>();
 
@@ -94,26 +98,43 @@ public class SurveyActivity extends AppCompatActivity {
             mQuestionNumberView.setText(mQuestionNumber + "");
             mQuestionNumber++;
         } else {
-
             // if we have completed all questions in the survey, create the new user
             CurrentUser curr = CurrentUser.getCurrentUser();
             //analysis of survey answers
             //these are dummy values! 
             int stress = 9;
-            int sleep = 10;
+            int sleep = 2;
             int mentalHealth = 5;
             int community = 3;
             int ph = 4;
-            curr.updateStress(stress);
+            Log.d("tellllllllll", "whyyyyyyyyyyy");
             curr.updateSleep(sleep);
             curr.updateMentalHealth(mentalHealth);
             curr.updateCommunity(community);
             curr.updatePhysicalHealth(ph);
-
+            curr.updateStress(stress);
+            Log.d("-----------your chillin", "reached hereeeeeee");
             // create the user in the database
-            createUser();
+//            createUser();
+            int max = proc.getRecs(curr);
+            String maxMessage = "";
+            if (max == 0) {
+                maxMessage = "mh";
+            } else if (max == 1) {
+                maxMessage = "st";
+            } else if (max == 2) {
+                maxMessage = "ph";
+            } else if (max == 3) {
+                maxMessage = "sc";
+            } else {
+                 maxMessage = "sl";
+            }
 
+            //0 : sc, 1 : mh, 2 : ph, 3 : d, 4 : sl, 5 : st
             Intent i = new Intent(SurveyActivity.this, HomeActivity.class);
+//            Log.d("------------------intent occurs", "hi");
+            Log.d("----------------- survey curr", curr.getCommunity()+"");
+            i.putExtra("maxScore", maxMessage);
             startActivity(i);
         }
     }
@@ -143,7 +164,7 @@ public class SurveyActivity extends AppCompatActivity {
                     + "&stress=" + user.getStress()
                     + "&physicalHealth=" + user.getPhysicalHealth()
                     + "&community=" + user.getCommunity()
-                    + "sleep=" + user.getSleep());
+                    + "&sleep=" + user.getSleep());
             AsyncTask<URL, String, String> task = new AsyncCreateClient();
             task.execute(url);
             Log.d(TAG, "----------- reached createUser " + url);
