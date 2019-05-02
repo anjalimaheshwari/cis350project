@@ -28,7 +28,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCallback {
-    ResourceDB resourceDB = new ResourceDB();
+    ResourceDB resourceDB = ResourceDB.getResourceDB();
     List<Resource> resources = resourceDB.getResourceList();
     double lat;
     double lng;

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RecsPage extends AppCompatActivity {
 
-    ResourceDB resourceDB = new ResourceDB();
+    ResourceDB resourceDB = ResourceDB.getResourceDB();
     List<Resource> resources = resourceDB.getResourceList();
     int index = 0;
 

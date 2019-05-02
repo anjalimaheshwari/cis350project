@@ -43,7 +43,7 @@ public class AsyncResourceClient extends AsyncTask<URL, String, String> {
             }
 
             ArrayList<Resource> resourcesList = getResourceFromText(resourceInfo);
-            ResourceDB db = new ResourceDB();
+            ResourceDB db = ResourceDB.getResourceDB();
             db.setResourceDB(resourcesList);
 
             return "";
@@ -133,8 +133,6 @@ public class AsyncResourceClient extends AsyncTask<URL, String, String> {
                 resourcesList.add(r);
             }
         }
-        ResourceDB db = new ResourceDB();
-        db.setResourceDB(resourcesList);
         return resourcesList;
     }
 }

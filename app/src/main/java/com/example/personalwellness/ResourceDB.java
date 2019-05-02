@@ -6,10 +6,18 @@ import java.util.ArrayList;
 
 public class ResourceDB implements Serializable {
     private List<User> userDB = new ArrayList<User>();
+    private static ResourceDB singleton = null;
     private List<Resource> resourceList = new ArrayList<Resource>();
 
-    public ResourceDB() {
+    private  ResourceDB() {
 
+    }
+
+    public static ResourceDB getResourceDB () {
+        if (singleton == null) {
+            singleton = new ResourceDB();
+        }
+        return singleton;
     }
 
     public void populateWithDefault() {

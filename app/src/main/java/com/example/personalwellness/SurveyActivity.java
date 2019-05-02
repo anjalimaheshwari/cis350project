@@ -25,7 +25,7 @@ public class SurveyActivity extends AppCompatActivity {
     private int mQuestionNumber = 0;
 
     private static final String TAG = SurveyActivity.class.getSimpleName();
-    ResourceDB resourceDB = new ResourceDB();
+    ResourceDB resourceDB = ResourceDB.getResourceDB();
     Proc proc = new Proc(resourceDB);
     private HashMap<Integer, String> surveyResponses;
 

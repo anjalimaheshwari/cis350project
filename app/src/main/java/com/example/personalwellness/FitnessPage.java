@@ -11,7 +11,7 @@ import android.widget.Button;
 import java.util.List;
 
 public class FitnessPage extends AppCompatActivity {
-    ResourceDB resourceDB = new ResourceDB();
+    ResourceDB resourceDB = ResourceDB.getResourceDB();
     List<Resource> resources = resourceDB.getResourceList();
     Button[] button = new Button[resources.size()];
     boolean[] isSpotify = new boolean[resources.size()];

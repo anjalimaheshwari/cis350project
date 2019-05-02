@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CAPSPage extends AppCompatActivity {
 
-    ResourceDB resourceDB = new ResourceDB();
+    ResourceDB resourceDB = ResourceDB.getResourceDB();
     List<Resource> resources = resourceDB.getResourceList();
     Button[] button = new Button[resources.size()];
     int index = 0;
