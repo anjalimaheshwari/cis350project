@@ -10,8 +10,11 @@ public class TempSurvey {
             "Overall, how would you rate your mental health?",
             "When did you get your last mental health examination?",
             "How knowledgeable are you about mental health related issues? ",
-            "Have you had feelings of depression within the past 6 months?"
-
+            "Have you had feelings of depression within the past 6 months?",
+            "Have you experienced trouble sleeping over the past month?",
+            "Approximately how many times per week do you exercise?",
+            "How much has stress been affecting your wellbeing over the past month?",
+            "To what extent do you feel you are a member of a community at Penn?"
     };
 
 
@@ -19,7 +22,12 @@ public class TempSurvey {
             {"Excellent", "Average", "Poor"},
             {"Over 6 months ago", "Less than 6 months ago", "I've never had one"},
             {"Very knowledgeable", "Somewhat knowledgeable", "Not knowledgeable"},
-            {"Yes", "No", "I'm not sure"}
+            {"Yes", "No", "I'm not sure"},
+            {"Very much", "Somewhat", "Not at all"},
+            {"Multiple", "Once or twice", "Not at all"},
+            {"Very much", "Somewhat", "Not at all"},
+            {"Very much", "Somewhat", "Not at all"}
+
     };
 
     public boolean checkQuestionAvailable(int a) {

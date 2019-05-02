@@ -102,18 +102,8 @@ public class SurveyActivity extends AppCompatActivity {
             CurrentUser curr = CurrentUser.getCurrentUser();
             //analysis of survey answers
             //these are dummy values! 
-            int stress = 9;
-            int sleep = 2;
-            int mentalHealth = 5;
-            int community = 3;
-            int ph = 4;
-            Log.d("tellllllllll", "whyyyyyyyyyyy");
-            curr.updateSleep(sleep);
-            curr.updateMentalHealth(mentalHealth);
-            curr.updateCommunity(community);
-            curr.updatePhysicalHealth(ph);
-            curr.updateStress(stress);
-            Log.d("-----------your chillin", "reached hereeeeeee");
+            assignHealthValues(curr);
+            Log.d("-----------you're chillin", "reached hereeeeeee");
             // create the user in the database
 //            createUser();
             int max = proc.getRecs(curr);
@@ -170,5 +160,51 @@ public class SurveyActivity extends AppCompatActivity {
             Log.d(TAG, "----------- reached createUser " + url);
         } catch (Exception e) {
         }
+    }
+
+    /*
+    Method assigns values to the user based on survey responses
+     */
+    private void assignHealthValues(CurrentUser curr) {
+        int stress = 0;
+        int sleep = 0;
+        int mentalHealth = 0;
+        int community = 0;
+        int ph = 0;
+        if (surveyResponses.get(0).equals("Poor")) {
+            mentalHealth += 2;
+        } else if (surveyResponses.get(0).equals("Average")) {
+            mentalHealth += 1;
+        }
+        if (surveyResponses.get(3).equals("Yes")) {
+            mentalHealth += 2;
+        } else if (surveyResponses.get(3).equals("I'm not sure")) {
+            mentalHealth += 1;
+        }
+        if (surveyResponses.get(4).equals("Very much")) {
+            sleep += 3;
+        } else if (surveyResponses.get(4).equals("Somewhat")) {
+            sleep += 1;
+        }
+        if (surveyResponses.get(5).equals("Not at all")) {
+            ph += 3;
+        } else if (surveyResponses.get(5).equals("Once or twice")) {
+            ph += 1;
+        }
+        if (surveyResponses.get(6).equals("Very much")) {
+            stress += 3;
+        } else if (surveyResponses.get(6).equals("Somewhat")) {
+            stress += 2;
+        }
+        if (surveyResponses.get(7).equals("Not at all")) {
+            community += 3;
+        } else if (surveyResponses.get(7).equals("Somewhat")) {
+            community += 1;
+        }
+        curr.updateSleep(sleep);
+        curr.updateMentalHealth(mentalHealth);
+        curr.updateCommunity(community);
+        curr.updatePhysicalHealth(ph);
+        curr.updateStress(stress);
     }
 }
