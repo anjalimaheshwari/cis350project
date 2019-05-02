@@ -9,6 +9,10 @@ public class ResourceDB implements Serializable {
     private List<Resource> resourceList = new ArrayList<Resource>();
 
     public ResourceDB() {
+
+    }
+
+    public void populateWithDefault() {
         resourceList.add(new Resource("Grief Referrals: " +
                 "Penn Students of AMF (Actively Moving Forward)","grief",
                 "1) a peer-led Grief Support Group for Penn students who are coping with the illness or death of a loved one to connect with others “who get it,”\n" +
@@ -108,7 +112,7 @@ public class ResourceDB implements Serializable {
         User john = new User("John Doe", "username", "password");
         john.updateCommunity(0);
         //john.updateDiet(0);
-       // john.updateFitness(8);
+        // john.updateFitness(8);
         john.updateMentalHealth(9);
         john.updateStress(4);
         john.updateSleep(0);
@@ -131,7 +135,11 @@ public class ResourceDB implements Serializable {
 
     public List<User> getUserDB() { return userDB; }
 
-    public void setResourceDB(List<Resource> resources) { resourceList = resources; }
+    public void setResourceDB(List<Resource> resources) {
+        for (Resource r : resources) {
+            resourceList.add(r);
+        }
+    }
 
     public void addUser(User u) {
         userDB.add(u);

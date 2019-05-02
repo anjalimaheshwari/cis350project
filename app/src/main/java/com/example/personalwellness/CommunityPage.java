@@ -26,7 +26,7 @@ public class CommunityPage extends AppCompatActivity {
         ConstraintLayout ll = (ConstraintLayout) findViewById(R.id.constraint_layout);
 
         for (int i = 0; i < resources.size(); i++) {
-            if (resources.get(i).getCategory().equals("sc")) {
+            if (resources.get(i).getCategory().trim().equals("sc")) {
                 button[index] = new Button(this);
                 button[index].setId(i+1);
                 button[index].setText(resources.get(i).getName());

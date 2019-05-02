@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         try {
-            Log.d("CAPSPage ", "-----------  setting resource DB");
+            Log.d("HomeActivity ", "-----------  setting resource DB");
             URL url = new URL("http://10.0.2.2:3002/all");
             AsyncTask<URL, String, String> task = new AsyncResourceClient();
             task.execute(url);

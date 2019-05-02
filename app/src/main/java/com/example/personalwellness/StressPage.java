@@ -25,7 +25,7 @@ public class StressPage extends AppCompatActivity {
         ConstraintLayout ll = (ConstraintLayout) findViewById(R.id.constraint_layout);
 
         for (int i = 0; i < resources.size(); i++) {
-            if (resources.get(i).getCategory().equals("st")) {
+            if (resources.get(i).getCategory().trim().equals("st")) {
                 button[index] = new Button(this);
                 button[index].setId(i+1);
                 button[index].setText(resources.get(i).getName());
