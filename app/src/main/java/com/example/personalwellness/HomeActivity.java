@@ -1,11 +1,14 @@
 package com.example.personalwellness;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import java.net.URL;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -14,8 +17,17 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        String extra = getIntent().getStringExtra("maxScore");
-        Log.d("-----------------max Score", extra);
+        try {
+            Log.d("CAPSPage ", "-----------  setting resource DB");
+            URL url = new URL("http://10.0.2.2:3002/all");
+            AsyncTask<URL, String, String> task = new AsyncResourceClient();
+            task.execute(url);
+            task.get();
+        } catch (Exception e) {
+
+        }
+        //String extra = getIntent().getStringExtra("maxScore");
+        //Log.d("-----------------max Score", extra);
 
         Button capsButton = (Button) findViewById(R.id.mentalhealth);
         capsButton.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +90,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent int7 = new Intent(HomeActivity.this,RecsPage.class);
-                int7.putExtra("maxCategory", extra);
-                Log.d("------------extra", extra);
+                //int7.putExtra("maxCategory", extra);
+                //Log.d("------------extra", extra);
                 startActivity(int7);
             }
         });

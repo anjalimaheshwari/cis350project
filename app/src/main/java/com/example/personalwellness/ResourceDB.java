@@ -131,6 +131,8 @@ public class ResourceDB implements Serializable {
 
     public List<User> getUserDB() { return userDB; }
 
+    public void setResourceDB(List<Resource> resources) { resourceList = resources; }
+
     public void addUser(User u) {
         userDB.add(u);
     }
