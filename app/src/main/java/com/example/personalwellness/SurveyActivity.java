@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class SurveyActivity extends AppCompatActivity {
 
@@ -171,34 +172,34 @@ public class SurveyActivity extends AppCompatActivity {
         int mentalHealth = 0;
         int community = 0;
         int ph = 0;
-        if (surveyResponses.get(0).equals("Poor")) {
+        if (surveyResponses.get(1).equals("Poor")) {
             mentalHealth += 2;
-        } else if (surveyResponses.get(0).equals("Average")) {
+        } else if (surveyResponses.get(1).equals("Average")) {
             mentalHealth += 1;
         }
-        if (surveyResponses.get(3).equals("Yes")) {
+        if (surveyResponses.get(4).equals("Yes")) {
             mentalHealth += 2;
-        } else if (surveyResponses.get(3).equals("I'm not sure")) {
+        } else if (surveyResponses.get(4).equals("I'm not sure")) {
             mentalHealth += 1;
         }
-        if (surveyResponses.get(4).equals("Very much")) {
+        if (surveyResponses.get(5).equals("Very much")) {
             sleep += 3;
-        } else if (surveyResponses.get(4).equals("Somewhat")) {
+        } else if (surveyResponses.get(5).equals("Somewhat")) {
             sleep += 1;
         }
-        if (surveyResponses.get(5).equals("Not at all")) {
+        if (surveyResponses.get(6).equals("Not at all")) {
             ph += 3;
-        } else if (surveyResponses.get(5).equals("Once or twice")) {
+        } else if (surveyResponses.get(6).equals("Once or twice")) {
             ph += 1;
         }
-        if (surveyResponses.get(6).equals("Very much")) {
+        if (surveyResponses.get(7).equals("Very much")) {
             stress += 3;
-        } else if (surveyResponses.get(6).equals("Somewhat")) {
+        } else if (surveyResponses.get(7).equals("Somewhat")) {
             stress += 2;
         }
-        if (surveyResponses.get(7).equals("Not at all")) {
+        if (surveyResponses.get(8).equals("Not at all")) {
             community += 3;
-        } else if (surveyResponses.get(7).equals("Somewhat")) {
+        } else if (surveyResponses.get(8).equals("Somewhat")) {
             community += 1;
         }
         curr.updateSleep(sleep);
