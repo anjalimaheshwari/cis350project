@@ -3,6 +3,8 @@ package com.example.personalwellness;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,7 +37,12 @@ public class AsyncClientCheckForUser extends AsyncTask<URL, String, String> {
             conn.connect();// read first line of data that is returned
 
             Scanner in = new Scanner(url.openStream());
-            String msg = in.nextLine();
+            String user = in.nextLine();
+            JSONObject userJSON = new JSONObject(user);
+            mentalHealth = Integer.parseInt(userJSON.getString("mentalHealth"));
+            physicalHealth = Integer.parseInt(userJSON.getString("physicalHealth"));
+            stress = Integer.parseInt(userJSON.getString("stress"));
+            community = Integer.parseInt(userJSON.getString("community"));
 
             boolean realUser = false;
 
@@ -45,6 +52,7 @@ public class AsyncClientCheckForUser extends AsyncTask<URL, String, String> {
                     realUser = true;
                 }
             }
+
 
             if (realUser) {
                 return "bad";

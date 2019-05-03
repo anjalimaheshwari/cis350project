@@ -69,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
                     // if the user does exist in the database, create the singleton object
                     CurrentUser curr = CurrentUser.getCurrentUser();
+                    curr.updateCommunity(AsyncClientCheckForUser.community);
+                    curr.updateMentalHealth(AsyncClientCheckForUser.mentalHealth);
+                    curr.updatePhysicalHealth(AsyncClientCheckForUser.physicalHealth);
+                    curr.updateStress(AsyncClientCheckForUser.stress);
+                    curr.updateSleep(0);
 
                     // this will populate the singleton user class
                     getUser(usernameString);
