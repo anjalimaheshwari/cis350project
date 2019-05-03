@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ResourceDB implements Serializable {
-    private List<User> userDB = new ArrayList<User>();
     private static ResourceDB singleton = null;
     private List<Resource> resourceList = new ArrayList<Resource>();
 
@@ -116,15 +115,6 @@ public class ResourceDB implements Serializable {
                 "h", "", "st",
                 "",
                 "", 1, 1, "", true));
-
-        User john = new User("John Doe", "username", "password");
-        john.updateCommunity(0);
-        //john.updateDiet(0);
-        // john.updateFitness(8);
-        john.updateMentalHealth(9);
-        john.updateStress(4);
-        john.updateSleep(0);
-        userDB.add(john);
     }
 
     public List<Resource> getCategoryResource(String category) {
@@ -141,15 +131,9 @@ public class ResourceDB implements Serializable {
         return resourceList;
     }
 
-    public List<User> getUserDB() { return userDB; }
-
     public void setResourceDB(List<Resource> resources) {
         for (Resource r : resources) {
             resourceList.add(r);
         }
-    }
-
-    public void addUser(User u) {
-        userDB.add(u);
     }
 }

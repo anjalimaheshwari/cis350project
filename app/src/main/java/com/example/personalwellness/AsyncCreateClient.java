@@ -19,10 +19,6 @@ import java.util.Scanner;
 
 class AsyncCreateClient extends AsyncTask<URL, String, String> {
 
-    public void addUser (User user) {
-
-    }
-
     private static final String TAG = AsyncClient.class.getSimpleName();
 
     @Override

@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton, createAccountButton;
     public String usernameString;
     public String passwordString;
-
+    ResourceDB resourceDB = ResourceDB.getResourceDB();
+    Proc proc = new Proc(resourceDB);
     private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -77,8 +78,21 @@ public class MainActivity extends AppCompatActivity {
                     if (checkValidUser(passwordString, curr.getPassword())) {
                         Intent i = new Intent(MainActivity.this,
                                 HomeActivity.class);
-                        i.putExtra("community", curr.getCommunity());
-                        i.putExtra("accountNum", curr.getAccountNum());
+                        int max = proc.getRecs(curr);
+                        String maxMessage = "";
+                        if (max == 0) {
+                            maxMessage = "mh";
+                        } else if (max == 1) {
+                            maxMessage = "st";
+                        } else if (max == 2) {
+                            maxMessage = "ph";
+                        } else if (max == 3) {
+                            maxMessage = "sc";
+                        } else {
+                            maxMessage = "sl";
+                        }
+                        Log.d("----------------- survey curr", curr.getCommunity()+"");
+                        i.putExtra("maxScore", maxMessage);
                         startActivity(i);
                     } else {
                         // if the user has entered a bad password...
@@ -94,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                 }
-
             }
         });
 
@@ -104,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i2 = new Intent(MainActivity.this,
                         CreateAccountActivity.class);
-                Log.d(TAG, "Got here in Main");
-//                i2.putExtra("community", curr.getCommunity());
                 startActivity(i2);
             }
         });

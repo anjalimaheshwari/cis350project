@@ -106,7 +106,7 @@ public class SurveyActivity extends AppCompatActivity {
             assignHealthValues(curr);
             Log.d("-----------you're chillin", "reached hereeeeeee");
             // create the user in the database
-//            createUser();
+            createUser();
             int max = proc.getRecs(curr);
             String maxMessage = "";
             if (max == 0) {

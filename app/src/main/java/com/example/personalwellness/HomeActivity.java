@@ -26,8 +26,8 @@ public class HomeActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-        //String extra = getIntent().getStringExtra("maxScore");
-        //Log.d("-----------------max Score", extra);
+        String extra = getIntent().getStringExtra("maxScore");
+        Log.d("-----------------max Score", extra);
 
         Button capsButton = (Button) findViewById(R.id.mentalhealth);
         capsButton.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +90,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent int7 = new Intent(HomeActivity.this,RecsPage.class);
-                //int7.putExtra("maxCategory", extra);
-                //Log.d("------------extra", extra);
+                int7.putExtra("maxCategory", extra);
+                Log.d("------------extra", extra);
                 startActivity(int7);
             }
         });
