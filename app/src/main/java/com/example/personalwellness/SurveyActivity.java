@@ -123,7 +123,6 @@ public class SurveyActivity extends AppCompatActivity {
 
             //0 : sc, 1 : mh, 2 : ph, 3 : d, 4 : sl, 5 : st
             Intent i = new Intent(SurveyActivity.this, HomeActivity.class);
-//            Log.d("------------------intent occurs", "hi");
             Log.d("----------------- survey curr", curr.getCommunity()+"");
             i.putExtra("maxScore", maxMessage);
             startActivity(i);

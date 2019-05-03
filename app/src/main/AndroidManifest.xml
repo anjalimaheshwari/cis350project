@@ -34,9 +34,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".TEMPACTIVITY"
-            android:label="@string/title_activity_tempactivity"></activity>
-        <activity
             android:name=".MapsActivityTemp"
             android:label="@string/title_activity_maps_temp" />
         <activity android:name=".SleepPage" />
