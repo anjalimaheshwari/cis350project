@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         try {
             Log.d("HomeActivity ", "-----------  setting resource DB");
-            URL url = new URL("http://10.0.2.2:3002/all");
+            URL url = new URL("http://10.0.2.2:3003/all");
             AsyncTask<URL, String, String> task = new AsyncResourceClient();
             task.execute(url);
             task.get();

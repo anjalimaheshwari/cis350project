@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // check for correct password
                     if (checkValidUser(passwordString, curr.getPassword())) {
-                        //resourceDB.clearResources();
+                        resourceDB.clearResources();
                         Intent i = new Intent(MainActivity.this,
                                 HomeActivity.class);
                         int max = proc.getRecs(curr);
