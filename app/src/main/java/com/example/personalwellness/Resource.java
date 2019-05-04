@@ -50,4 +50,17 @@ public class Resource {
     public double getLng() { return lon; }
 
     public boolean getIsSpotify() { return isSpotify; }
+
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Resource)) {
+            return false;
+        }
+        Resource r = (Resource)o;
+        return this.name == r.name;
+    }
+
+
 }

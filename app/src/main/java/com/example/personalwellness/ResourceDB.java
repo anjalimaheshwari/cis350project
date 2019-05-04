@@ -19,6 +19,10 @@ public class ResourceDB implements Serializable {
         return singleton;
     }
 
+    public void clearResources() {
+        resourceList = new ArrayList<Resource>();
+    }
+
     public List<Resource> getCategoryResource(String category) {
         List<Resource> categoryResources = null;
         for (Resource curr : resourceList) {

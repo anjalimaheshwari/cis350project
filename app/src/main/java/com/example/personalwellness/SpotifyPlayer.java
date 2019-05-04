@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -109,12 +110,17 @@ public class SpotifyPlayer extends AppCompatActivity{
 
     private void connected() {
 
+        ImageButton imageButton= (ImageButton) findViewById(R.id.buttonImage);
+
         if (this.type.equals("stress")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SOOTHING_URI);
+            imageButton.setImageResource(R.drawable.meditation2);
         } else if (this.type.equals("fitness")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + FITNESS_URI);
+            imageButton.setImageResource(R.drawable.beastmode);
         } else {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SLEEP_URI);
+            imageButton.setImageResource(R.drawable.chill);
         }
 
         // Subscribe to PlayerState
