@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.net.URL;
 
@@ -29,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         String extra = getIntent().getStringExtra("maxScore");
         Log.d("-----------------max Score", extra);
 
-        Button capsButton = (Button) findViewById(R.id.mentalhealth);
+        ImageButton capsButton = (ImageButton) findViewById(R.id.mentalhealth);
         capsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        Button dietButton = (Button) findViewById(R.id.diet);
+        ImageButton dietButton = (ImageButton) findViewById(R.id.diet);
         dietButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        Button stressButton = (Button) findViewById(R.id.stress);
+        ImageButton stressButton = (ImageButton) findViewById(R.id.stress);
         stressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        Button fitnessButton = (Button) findViewById(R.id.fitness);
+        ImageButton fitnessButton = (ImageButton) findViewById(R.id.fitness);
         fitnessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        Button sleepButton = (Button) findViewById(R.id.sleep);
+        ImageButton sleepButton = (ImageButton) findViewById(R.id.sleep);
         sleepButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        Button communityButton = (Button) findViewById(R.id.community);
+        ImageButton communityButton = (ImageButton) findViewById(R.id.community);
         communityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
