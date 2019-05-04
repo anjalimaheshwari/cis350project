@@ -6,21 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".SurveyActivity"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="0dp"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="0dp"
+        android:padding="0dp">
 
         <TextView
             android:id="@+id/question_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:text="Question"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="20sp" />
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/question_number"
@@ -37,11 +40,12 @@
     <TextView
         android:id="@+id/question"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         android:layout_weight="1"
-        android:text="How are you feeling today?"
+        android:text=" How are you feeling today?"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="16sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
     <Button
@@ -50,9 +54,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:background="#FFAEF0E9"
+        android:background="@color/colorPrimary"
+        android:fontFamily="sans-serif-condensed"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="normal"
         android:text="placeholder"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/choice2"
@@ -60,9 +69,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:background="#FFAEF0E9"
+        android:background="@color/colorPrimary"
+        android:fontFamily="sans-serif-condensed"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="normal"
         android:text="placeholder"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/choice3"
@@ -70,20 +84,28 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:background="#FFAEF0E9"
+        android:background="@color/colorPrimary"
+        android:fontFamily="sans-serif-condensed"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="normal"
         android:text="placeholder"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+        android:textColor="#FFFFFF" />
 
     <Button
+        android:id="@+id/previous_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="previous question"
-        android:background="#ff7c6d"
-        android:textColor="#fff"
         android:layout_marginBottom="10dp"
-        android:layout_weight = "1"
-        android:id="@+id/previous_question"/>
-
-
+        android:layout_weight="1"
+        android:background="@color/colorAccent"
+        android:fontFamily="sans-serif-condensed"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:text="Previous Question"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>
