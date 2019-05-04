@@ -111,7 +111,6 @@ public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCa
             distance = Math.acos(distance);
             distance = rad2deg(distance);
             distance = distance * 60 * 1.1515;
-            Log.d(TAG, "-----------DISTANCE " + distance);
             TextView textDistance = (TextView) findViewById(R.id.distance_text);
             DecimalFormat df = new DecimalFormat("#.##");
             String d = df.format(distance);
@@ -142,7 +141,6 @@ public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCa
 
 
     private void moveCam(LatLng coords, String title) {
-        Log.d(TAG, "moving camera to lat: " + coords.latitude + ", lng " + coords.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coords, 16f));
         if (!title.equals("My location")) {
             MarkerOptions options = new MarkerOptions().position(coords).title(title);
@@ -151,8 +149,6 @@ public class GriefReferralPage extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void getUserLocation() {
-
-        Log.d(TAG, "-----------getting user location");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try {

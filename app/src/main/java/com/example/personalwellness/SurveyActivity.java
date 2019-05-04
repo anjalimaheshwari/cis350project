@@ -102,9 +102,7 @@ public class SurveyActivity extends AppCompatActivity {
             // if we have completed all questions in the survey, create the new user
             CurrentUser curr = CurrentUser.getCurrentUser();
             //analysis of survey answers
-            //these are dummy values! 
             assignHealthValues(curr);
-            Log.d("-----------you're chillin", "reached hereeeeeee");
             // create the user in the database
             createUser();
             int max = proc.getRecs(curr);

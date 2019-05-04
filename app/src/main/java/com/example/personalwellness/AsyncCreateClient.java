@@ -17,6 +17,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+This class allows us to create a user and send it to the database
+ */
 class AsyncCreateClient extends AsyncTask<URL, String, String> {
 
     private static final String TAG = AsyncClient.class.getSimpleName();
@@ -26,8 +29,6 @@ class AsyncCreateClient extends AsyncTask<URL, String, String> {
         try {
 
             URL url = urls[0];
-
-            Log.d(TAG, "Create----------- got url " + url);
             // create connection and send HTTP request
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod("POST");
@@ -35,12 +36,10 @@ class AsyncCreateClient extends AsyncTask<URL, String, String> {
             conn.setDoInput(true);
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-
             conn.setChunkedStreamingMode(0);
             conn.connect();
             // get the current user to add to mongo
             CurrentUser curr = CurrentUser.getCurrentUser();
-
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("name",curr.getName());
             jsonBody.put("username",curr.getUserName());
@@ -52,13 +51,11 @@ class AsyncCreateClient extends AsyncTask<URL, String, String> {
             Log.d(TAG, "Create----------- created JSON " + jsonBody.toString());
 
             OutputStream out = new BufferedOutputStream(conn.getOutputStream());
-
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
             writer.write(jsonBody.toString());
             writer.flush();
             writer.close();
             out.close();
-
             conn.disconnect();
             return "";
         }catch (Exception e) {

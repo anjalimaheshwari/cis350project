@@ -26,7 +26,6 @@ public class RecsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_page);
         String extra = getIntent().getStringExtra("maxCategory");
-        Log.d("-------recspage", extra);
         ConstraintLayout ll = (ConstraintLayout) findViewById(R.id.constraint_layout);
 
         for (int i = 0; i < resources.size(); i++) {

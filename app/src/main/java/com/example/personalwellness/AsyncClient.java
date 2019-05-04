@@ -22,25 +22,19 @@ public class AsyncClient extends AsyncTask<URL, String, String> {
 
     protected String doInBackground(URL... urls) {
         try {
-            //get the first URL from the array
             URL url = urls[0];
-            Log.d(TAG, "----------- got url " + url);
             // create connection and send HTTP request
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             Log.d(TAG, "----------- created connection ");
             conn.setRequestMethod("GET");
-            conn.connect();// read first line of data that is returned
-            Log.d(TAG, "----------- read first line of data that is returned ");
+            conn.connect();
             Scanner in = new Scanner(url.openStream());
             String msg = in.nextLine();
-
-
             ArrayList<String> userInfo = new ArrayList<>();
 
             while (in.hasNextLine()) {
                 userInfo.add(in.nextLine());
             }
-            Log.d(TAG, "----------- userinfo " + userInfo);
 
             getUserFromText(userInfo);
 

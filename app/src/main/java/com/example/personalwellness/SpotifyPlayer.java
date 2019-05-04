@@ -73,8 +73,6 @@ public class SpotifyPlayer extends AppCompatActivity{
 
                     public void onFailure(Throwable throwable) {
                         Log.e("MyActivity", throwable.getMessage(), throwable);
-
-                        // Something went wrong when attempting to connect! Handle errors here
                     }
                 });
 
@@ -113,13 +111,10 @@ public class SpotifyPlayer extends AppCompatActivity{
 
         if (this.type.equals("stress")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SOOTHING_URI);
-            //imageView.setImageResource(R.drawable.chill);
         } else if (this.type.equals("fitness")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + FITNESS_URI);
-            //imageView.setImageResource(R.drawable.beastmode);
         } else {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SLEEP_URI);
-            //imageView.setImageResource(R.drawable.meditation);
         }
 
         // Subscribe to PlayerState

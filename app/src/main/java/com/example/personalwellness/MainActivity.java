@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             maxMessage = "sl";
                         }
-                        Log.d("----------------- survey curr", curr.getCommunity()+"");
                         i.putExtra("maxScore", maxMessage);
                         startActivity(i);
                     } else {
@@ -128,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean checkValidUser(String inputPassword, String truePassword) {
         if (truePassword.equals(inputPassword)) {
-            Log.d(TAG, "----------- good pw");
             return true;
         }
         return false;

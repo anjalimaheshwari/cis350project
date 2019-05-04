@@ -30,10 +30,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-
-        Log.d("Yaw", "Got here in CreateAccount");
-
-
         errorTV = (TextView) findViewById(R.id.caErrorText);
         nameET = (EditText) findViewById(R.id.caNameEditText);
         usernameET = (EditText) findViewById(R.id.caUsernameEditText);
@@ -100,7 +96,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                     curr.updatePassword(passwordString);
                     Intent i = new Intent(CreateAccountActivity.this,
                             SurveyActivity.class);
-                    Log.d("currName", curr.getName());
                     i.putExtra("currName", curr.getName());
                     startActivity(i);
                 }

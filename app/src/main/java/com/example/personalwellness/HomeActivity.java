@@ -91,7 +91,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent int7 = new Intent(HomeActivity.this,RecsPage.class);
                 int7.putExtra("maxCategory", extra);
-                Log.d("------------extra", extra);
                 startActivity(int7);
             }
         });
