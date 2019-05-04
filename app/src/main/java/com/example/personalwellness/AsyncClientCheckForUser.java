@@ -27,9 +27,7 @@ public class AsyncClientCheckForUser extends AsyncTask<URL, String, String> {
      */
     protected String doInBackground(URL... urls) {
         try {
-            //get the first URL from the array
             URL url = urls[0];
-            Log.d(TAG, "----------- got url " + url);
             // create connection and send HTTP request
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             Log.d(TAG, "----------- created connection ");

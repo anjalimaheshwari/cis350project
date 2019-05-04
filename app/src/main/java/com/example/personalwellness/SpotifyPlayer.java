@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -73,8 +74,6 @@ public class SpotifyPlayer extends AppCompatActivity{
 
                     public void onFailure(Throwable throwable) {
                         Log.e("MyActivity", throwable.getMessage(), throwable);
-
-                        // Something went wrong when attempting to connect! Handle errors here
                     }
                 });
 
@@ -111,15 +110,17 @@ public class SpotifyPlayer extends AppCompatActivity{
 
     private void connected() {
 
+        ImageButton imageButton= (ImageButton) findViewById(R.id.buttonImage);
+
         if (this.type.equals("stress")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SOOTHING_URI);
-            //imageView.setImageResource(R.drawable.chill);
+            imageButton.setImageResource(R.drawable.meditation2);
         } else if (this.type.equals("fitness")) {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + FITNESS_URI);
-            //imageView.setImageResource(R.drawable.beastmode);
+            imageButton.setImageResource(R.drawable.beastmode);
         } else {
             mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:" + SLEEP_URI);
-            //imageView.setImageResource(R.drawable.meditation);
+            imageButton.setImageResource(R.drawable.chill);
         }
 
         // Subscribe to PlayerState
